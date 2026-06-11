@@ -1,0 +1,76 @@
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import useAuthStore from '../store/authStore';
+
+export default function Register() {
+  const [form, setForm]         = useState({ name: '', email: '', password: '' });
+  const [error, setError]       = useState('');
+  const { register, isLoading } = useAuthStore();
+  const navigate                = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try { await register(form.name, form.email, form.password); navigate('/dashboard'); }
+    catch (err) { setError(err.response?.data?.message || 'Erreur lors de l\'inscription'); }
+  };
+
+  const fields = [
+    { key: 'name',     label: 'Nom complet',   type: 'text',     placeholder: 'Jean Dupont'         },
+    { key: 'email',    label: 'Email',          type: 'email',    placeholder: 'vous@exemple.com'    },
+    { key: 'password', label: 'Mot de passe',   type: 'password', placeholder: 'Minimum 8 caractères' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[var(--bg-0)] flex items-center justify-center p-4">
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }} className="w-full max-w-sm">
+
+        <div className="mb-10">
+          <div className="label-mono mb-2">Auth / Inscription</div>
+          <div className="font-display text-3xl text-[var(--text-1)]">
+            DevFlow<span style={{ color: '#0047FF' }}>.</span>
+          </div>
+          <p className="text-sm text-[var(--text-3)] mt-2">Créez votre espace de gestion freelance.</p>
+        </div>
+
+        {error && (
+          <div className="text-sm text-red-400 px-4 py-3 mb-6"
+            style={{ border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {fields.map(({ key, label, type, placeholder }) => (
+            <div key={key}>
+              <label className="label-mono block mb-2">{label}</label>
+              <input type={type} value={form[key]}
+                onChange={e => setForm({ ...form, [key]: e.target.value })}
+                placeholder={placeholder} required
+                className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-3 outline-none focus:border-[#0047FF] transition-colors placeholder-neutral-700"
+                style={{ border: '1px solid var(--border-2)' }} />
+            </div>
+          ))}
+
+          <button type="submit" disabled={isLoading}
+            className="w-full flex items-center justify-center gap-2 py-3 text-sm font-medium text-[var(--text-1)] transition-colors mt-2 disabled:opacity-50"
+            style={{ background: '#0047FF' }}
+            onMouseEnter={e => !isLoading && (e.currentTarget.style.background = '#0036CC')}
+            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            {isLoading
+              ? <div className="w-4 h-4 border border-[var(--border-2)] border-t-white rounded-full animate-spin" />
+              : <><span>Créer mon compte</span><ArrowRight size={14} /></>}
+          </button>
+        </form>
+
+        <p className="text-sm text-[var(--text-4)] mt-8">
+          Déjà un compte ?{' '}
+          <Link to="/login" className="text-[#0047FF] hover:underline">Se connecter</Link>
+        </p>
+      </motion.div>
+    </div>
+  );
+}

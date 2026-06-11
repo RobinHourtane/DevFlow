@@ -1,0 +1,267 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── UTILISATEUR (freelance ou agence) ───────────────────────────────────────
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  password     String
+  name         String
+  role         Role      @default(FREELANCE)
+  avatar       String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  projects     Project[]
+  clients      Client[]
+  notifications Notification[]
+  aiLogs       AiLog[]
+}
+
+enum Role {
+  FREELANCE
+  AGENCY_OWNER
+  AGENCY_MEMBER
+}
+
+// ─── CLIENT ──────────────────────────────────────────────────────────────────
+model Client {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String
+  phone        String?
+  company      String?
+  sector       String?
+  address      String?
+  notes        String?   @db.Text
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id])
+  projects     Project[]
+}
+
+// ─── PROJET ──────────────────────────────────────────────────────────────────
+model Project {
+  id             Int           @id @default(autoincrement())
+  name           String
+  description    String?       @db.Text
+  type           ProjectType
+  status         ProjectStatus @default(PROSPECT)
+  budget         Float?
+  budgetSpent    Float         @default(0)
+  startDate      DateTime?
+  endDate        DateTime?
+  signedAt       DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // ── Google Drive ──────────────────────────────────────────────────────────
+  driveFolderId  String?       // ID du dossier Drive créé automatiquement
+  driveFolderUrl String?       // Lien direct vers le dossier
+  driveSummaryId String?       // ID du Google Doc récapitulatif (màj à chaque analyse IA)
+
+  userId         Int
+  user           User          @relation(fields: [userId], references: [id])
+  clientId       Int?
+  client         Client?       @relation(fields: [clientId], references: [id])
+
+  phases         ProjectPhase[]
+  tasks          Task[]
+  contracts      Contract[]
+  invoices       Invoice[]
+  fileStructures FileStructure[]
+  aiLogs         AiLog[]
+  notifications  Notification[]
+}
+
+enum ProjectType {
+  SITE_VITRINE
+  E_COMMERCE
+  SAAS
+  APP_MOBILE
+  REFONTE
+  LANDING_PAGE
+  AUTRE
+}
+
+enum ProjectStatus {
+  PROSPECT
+  NEGOTIATION
+  SIGNED
+  IN_PROGRESS
+  REVIEW
+  DELIVERED
+  ARCHIVED
+}
+
+// ─── PHASE DE PROJET ─────────────────────────────────────────────────────────
+model ProjectPhase {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  order       Int
+  status      PhaseStatus @default(TODO)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  projectId   Int
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tasks       Task[]
+}
+
+enum PhaseStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+// ─── TÂCHE ───────────────────────────────────────────────────────────────────
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?    @db.Text
+  status      TaskStatus @default(TODO)
+  priority    Priority   @default(MEDIUM)
+  dueDate     DateTime?
+  estimatedH  Float?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  projectId   Int
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  phaseId     Int?
+  phase       ProjectPhase? @relation(fields: [phaseId], references: [id])
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+// ─── CONTRAT ─────────────────────────────────────────────────────────────────
+model Contract {
+  id          Int            @id @default(autoincrement())
+  title       String
+  content     String         @db.LongText
+  status      ContractStatus @default(DRAFT)
+  signedAt    DateTime?
+  pdfPath     String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  projectId   Int
+  project     Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+enum ContractStatus {
+  DRAFT
+  SENT
+  SIGNED
+  CANCELLED
+}
+
+// ─── FACTURE / DEVIS ─────────────────────────────────────────────────────────
+model Invoice {
+  id          Int           @id @default(autoincrement())
+  number      String        @unique
+  type        InvoiceType
+  status      InvoiceStatus @default(DRAFT)
+  amount      Float
+  tax         Float         @default(20)
+  dueDate     DateTime?
+  paidAt      DateTime?
+  pdfPath     String?
+  notes       String?       @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  projectId   Int
+  project     Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  items       InvoiceItem[]
+}
+
+model InvoiceItem {
+  id          Int     @id @default(autoincrement())
+  description String
+  quantity    Float
+  unitPrice   Float
+  total       Float
+
+  invoiceId   Int
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+enum InvoiceType {
+  QUOTE
+  DEPOSIT
+  BALANCE
+  FULL
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// ─── STRUCTURE DE FICHIERS (générée par IA) ──────────────────────────────────
+model FileStructure {
+  id          Int      @id @default(autoincrement())
+  name        String
+  structure   String   @db.LongText  // JSON de l'arborescence
+  createdAt   DateTime @default(now())
+
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// ─── LOG DES AGENTS IA ───────────────────────────────────────────────────────
+model AiLog {
+  id          Int      @id @default(autoincrement())
+  agentType   String
+  prompt      String   @db.Text
+  response    String   @db.LongText
+  tokensUsed  Int?
+  createdAt   DateTime @default(now())
+
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  projectId   Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+}
+
+// ─── NOTIFICATIONS ───────────────────────────────────────────────────────────
+model Notification {
+  id          Int      @id @default(autoincrement())
+  title       String
+  message     String
+  type        String   // deadline, payment, task, info
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  projectId   Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+}

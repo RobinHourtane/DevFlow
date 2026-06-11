@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+/* Variante dark basée sur une classe (utilisée par la page Loans) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Bascule de thème en cercle (View Transitions API) — page Loans */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root {
+  --bg-0: #050505;
+  --bg-1: #0a0a0a;
+  --bg-2: #171717;
+  --bg-3: #262626;
+  --border-1: #171717;
+  --border-2: #262626;
+  --border-3: #404040;
+  --text-1: #ffffff;
+  --text-2: #a3a3a3;
+  --text-3: #737373;
+  --text-4: #525252;
+  --text-5: #404040;
+  --hover-1: rgba(255, 255, 255, 0.04);
+}
+
+:root.light {
+  --bg-0: #f3f1ed;
+  --bg-1: #faf9f7;
+  --bg-2: #ece8e1;
+  --bg-3: #ddd7cd;
+  --border-1: #e6e1d9;
+  --border-2: #d6cfc4;
+  --border-3: #bcb4a7;
+  --text-1: #1d1b18;
+  --text-2: #6e6862;
+  --text-3: #948d83;
+  --text-4: #aea89e;
+  --text-5: #c4beb4;
+  --hover-1: rgba(0, 0, 0, 0.035);
+}
+
+html, body, #root { height: 100%; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Manrope", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-0);
+  color: var(--text-1);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.font-display {
+  font-family: "Outfit", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Label style : UPPERCASE MONO */
+.label-mono {
+  font-family: "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.68rem;
+  color: var(--text-4);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--border-3); }
+
+/* Animations */
+.stagger-in { animation: slide-up 0.28s ease-out both; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Accent blue glow */
+.blue-glow { box-shadow: 0 0 24px rgba(0, 71, 255, 0.2); }
