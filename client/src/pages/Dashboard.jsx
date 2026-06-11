@@ -17,7 +17,7 @@ const revenueData = [
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[var(--bg-1)] border border-[var(--border-2)] px-4 py-3 text-sm">
+    <div className="bg-[var(--bg-1)] border border-[var(--border-2)] px-4 py-3 text-sm rounded-lg">
       <p className="label-mono mb-1">{label}</p>
       <p className="text-[var(--text-1)] font-mono">{payload[0].value.toLocaleString('fr-FR')} €</p>
     </div>

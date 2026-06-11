@@ -15,7 +15,6 @@ import Notifications from './pages/Notifications';
 import Agents from './pages/Agents';
 import Calendar from './pages/Calendar';
 import Analytics from './pages/Analytics';
-import Loans from './pages/Loans';
 import Settings from './pages/Settings';
 import useAuthStore from './store/authStore';
 
@@ -49,8 +48,6 @@ function App() {
         <Route path="/invoices"         element={protect(<Invoices />)} />
         <Route path="/notifications"    element={protect(<Notifications />)} />
         <Route path="/analytics"        element={protect(<Analytics />)} />
-        {/* Page test standalone (style LoanProX, hors layout DevFlow) */}
-        <Route path="/loans"            element={<ProtectedRoute><Loans /></ProtectedRoute>} />
         <Route path="/settings"         element={protect(<Settings />)} />
       </Routes>
     </BrowserRouter>

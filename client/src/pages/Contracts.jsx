@@ -206,12 +206,12 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
   if (isGenerating) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-6 px-8">
-        <div className="w-10 h-10 border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+        <div className="w-10 h-10 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
         <div className="text-center space-y-2">
           <p className="font-display text-lg text-[var(--text-1)] font-semibold">Rédaction du contrat…</p>
           <p className="text-[var(--text-3)] text-sm">L'IA génère un contrat juridiquement cohérent.<br />Cela prend 10 à 20 secondes.</p>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2.5 border border-[var(--accent)]/30 bg-[var(--accent)]/8">
+        <div className="flex items-center gap-2 px-4 py-2.5 border border-[var(--accent)]/30 bg-[var(--accent)]/8 rounded-lg">
           <Sparkles size={13} className="text-[var(--accent)]" />
           <span className="label-mono text-[var(--accent)]">{pDetails.name}</span>
         </div>
@@ -226,7 +226,7 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
       <div className="px-6 py-4 flex items-center justify-between shrink-0"
         style={{ borderBottom: '1px solid var(--border-1)' }}>
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg">
             <FileText size={14} className="text-[var(--accent)]" />
           </div>
           <div>
@@ -562,7 +562,7 @@ function ContractDetail({ contract, onStatusChange, onDelete }) {
             onMouseEnter={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = 'var(--accent-hover)')}
             onMouseLeave={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = 'var(--accent)')}>
             {downloading
-              ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Génération…</>
+              ? <><div className="w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" /> Génération…</>
               : <><Download size={13} /> Télécharger PDF</>}
           </button>
 
@@ -816,7 +816,7 @@ export default function Contracts() {
               <motion.div key="empty"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                 className="flex flex-col items-center justify-center h-full gap-5 text-center px-8">
-                <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)]">
+                <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)] rounded-lg">
                   <FileText size={24} className="text-[var(--text-4)]" />
                 </div>
                 <div>

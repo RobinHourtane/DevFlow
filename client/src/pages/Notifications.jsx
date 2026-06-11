@@ -91,7 +91,7 @@ export default function Notifications() {
           <div className="label-mono text-center py-16">Chargement…</div>
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center px-8">
-            <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)]">
+            <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)] rounded-lg">
               <Bell size={24} className="text-[var(--text-4)]" />
             </div>
             <div>

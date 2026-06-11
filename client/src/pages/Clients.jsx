@@ -192,7 +192,7 @@ export default function Clients() {
                   {/* Client */}
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-1)] shrink-0"
-                      style={{ background: 'color-mix(in srgb, var(--accent) 13%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 27%, transparent)', color: '#4d7fff' }}>
+                      style={{ background: 'color-mix(in srgb, var(--accent) 13%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 27%, transparent)', color: '#4d7fff', borderRadius: '8px' }}>
                       {c.name[0].toUpperCase()}
                     </div>
                     <div className="min-w-0">

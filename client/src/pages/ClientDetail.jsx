@@ -355,7 +355,7 @@ export default function ClientDetail() {
               </div>
             </div>
           ) : (
-            <div style={{ border: '1px solid var(--border-1)', margin: '0 2rem 2rem' }}>
+            <div style={{ border: '1px solid var(--border-1)', margin: '0 2rem 2rem', borderRadius: '8px' }}>
               {client.projects.map((p, i) => (
                 <div key={p.id}
                   style={{ borderBottom: i < client.projects.length - 1 ? '1px solid var(--bg-2)' : 'none' }}>
@@ -446,7 +446,7 @@ export default function ClientDetail() {
           </button>
         </div>
 
-        <div className="p-5" style={{ border: '1px solid #1a1a2e', background: '#05051a' }}>
+        <div className="p-5" style={{ border: '1px solid #1a1a2e', background: '#05051a', borderRadius: '8px' }}>
           {summaryLoading ? (
             <div className="flex items-center gap-3">
               <div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin shrink-0" />

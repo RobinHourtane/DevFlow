@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, FolderKanban, Users, FileText,
-  Bot, BarChart3, LogOut, Settings, CalendarDays, ListChecks, Receipt, Bell, Search, Sun, Moon, Wallet
+  Bot, BarChart3, LogOut, Settings, CalendarDays, ListChecks, Receipt, Bell, Search, Sun, Moon
 } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
 import useThemeStore from '../../store/themeStore';
@@ -19,7 +19,6 @@ const NAV = [
   { to: '/notifications', icon: Bell,            label: 'Notifications', badge: true },
   { to: '/agents',        icon: Bot,             label: 'Agents IA'     },
   { to: '/analytics',     icon: BarChart3,       label: 'Stats'         },
-  { to: '/loans',         icon: Wallet,          label: 'Prêts'         },
 ];
 
 export default function Sidebar({ onSearchOpen }) {

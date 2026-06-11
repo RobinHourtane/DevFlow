@@ -42,7 +42,7 @@ function CopyBtn({ text }) {
   const [copied, setCopied] = useState(false);
   const copy = () => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000); };
   return (
-    <button onClick={copy} title="Copier l'analyse" className="flex items-center gap-1.5 px-3 py-2 border border-[var(--border-3)] text-[var(--text-2)] hover:text-[var(--text-1)] hover:border-[var(--border-3)] transition-colors text-sm">
+    <button onClick={copy} title="Copier l'analyse" className="flex items-center gap-1.5 px-3 py-2 border border-[var(--border-3)] text-[var(--text-2)] hover:text-[var(--text-1)] hover:border-[var(--border-3)] transition-colors text-sm rounded-lg">
       {copied ? <><Check className="w-4 h-4 text-emerald-400" /> Copié</> : <><Copy className="w-4 h-4" /> Copier</>}
     </button>
   );
@@ -52,13 +52,13 @@ function CopyBtn({ text }) {
 function SectionCard({ title, icon: Icon, children, defaultOpen = true }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border border-[var(--border-2)] bg-[var(--bg-1)] overflow-hidden">
+    <div className="border border-[var(--border-2)] bg-[var(--bg-1)] overflow-hidden rounded-lg">
       <button
         onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-6 py-4 hover:bg-[var(--hover-1)] transition-colors"
       >
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg">
             <Icon className="w-4 h-4 text-[var(--accent)]" />
           </div>
           <span className="text-base font-semibold text-[var(--text-1)]">{title}</span>
@@ -108,7 +108,7 @@ function InputPhase({ onSubmit, error }) {
     <div className="max-w-3xl mx-auto px-10 py-8 space-y-8">
       {/* Intro */}
       <div className="text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--accent)]/40 bg-[var(--accent)]/10">
+        <div className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--accent)]/40 bg-[var(--accent)]/10 rounded-lg">
           <Sparkles className="w-4 h-4 text-[var(--accent)]" />
           <span className="text-sm font-medium text-[var(--accent)]">Analyse complète en 1 clic</span>
         </div>
@@ -122,7 +122,7 @@ function InputPhase({ onSubmit, error }) {
 
       <form onSubmit={submit} className="space-y-5">
         {/* Textarea */}
-        <div className="border border-[var(--border-3)] focus-within:border-[var(--accent)]/70 transition-colors bg-[var(--bg-1)]">
+        <div className="border border-[var(--border-3)] focus-within:border-[var(--accent)]/70 transition-colors bg-[var(--bg-1)] rounded-lg">
           <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-2)]">
             <span className="label-mono text-[var(--text-2)]">Cahier des charges *</span>
             <span className="text-sm text-[var(--text-4)] font-mono">{brief.length} car.</span>
@@ -139,7 +139,7 @@ function InputPhase({ onSubmit, error }) {
 
         {/* Lier à un projet */}
         {projects.length > 0 && (
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--accent)]/60 transition-colors">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--accent)]/60 transition-colors rounded-lg">
             <div className="px-4 py-2.5 border-b border-[var(--border-2)] flex items-center justify-between">
               <span className="label-mono text-[var(--text-2)]">Lier à un projet</span>
               <span className="text-xs text-[var(--text-4)]">optionnel — crée les phases &amp; tâches automatiquement</span>
@@ -159,7 +159,7 @@ function InputPhase({ onSubmit, error }) {
 
         {/* Hints */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--border-3)] transition-colors">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--border-3)] transition-colors rounded-lg">
             <div className="px-4 py-2.5 border-b border-[var(--border-2)]">
               <span className="label-mono text-[var(--text-2)]">Budget client souhaité</span>
             </div>
@@ -170,7 +170,7 @@ function InputPhase({ onSubmit, error }) {
               <span className="text-[var(--text-3)] pr-4 font-mono">€</span>
             </div>
           </div>
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--border-3)] transition-colors">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--border-3)] transition-colors rounded-lg">
             <div className="px-4 py-2.5 border-b border-[var(--border-2)]">
               <span className="label-mono text-[var(--text-2)]">Délai souhaité</span>
             </div>
@@ -207,8 +207,8 @@ function InputPhase({ onSubmit, error }) {
           ].map(tool => {
             const Icon = tool.icon;
             return (
-              <div key={tool.label} className="border border-[var(--border-2)] bg-[var(--bg-1)] p-5 space-y-3 opacity-60">
-                <div className="p-2 bg-[var(--bg-2)] border border-[var(--border-2)] w-fit">
+              <div key={tool.label} className="border border-[var(--border-2)] bg-[var(--bg-1)] p-5 space-y-3 opacity-60 rounded-lg">
+                <div className="p-2 bg-[var(--bg-2)] border border-[var(--border-2)] w-fit rounded-lg">
                   <Icon className="w-4 h-4 text-[var(--text-2)]" />
                 </div>
                 <div>
@@ -236,7 +236,7 @@ function LoadingPhase() {
   return (
     <div className="max-w-lg mx-auto px-10 py-20 space-y-10">
       <div className="text-center space-y-4">
-        <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
+        <div className="w-12 h-12 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
         <p className="font-display text-2xl text-[var(--text-1)] font-semibold">Analyse en cours…</p>
         <p className="text-[var(--text-3)] text-base">L'IA traite votre cahier des charges, cela prend 5 à 15 secondes.</p>
       </div>
@@ -332,10 +332,10 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}
-      className="border border-[var(--accent)]/30 bg-[var(--accent)]/5">
+      className="border border-[var(--accent)]/30 bg-[var(--accent)]/5 rounded-lg">
       <div className="flex items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 shrink-0">
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 shrink-0 rounded-lg">
             <Users className="w-4 h-4 text-[var(--accent)]" />
           </div>
           <div className="min-w-0">
@@ -344,7 +344,7 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
           </div>
         </div>
         <button onClick={() => setOpen(o => !o)}
-          className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--accent)] border border-[var(--accent)]/40 hover:bg-[var(--accent)]/10 transition-colors">
+          className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--accent)] border border-[var(--accent)]/40 hover:bg-[var(--accent)]/10 transition-colors rounded-lg">
           {open ? 'Annuler' : 'Créer la fiche client'}
         </button>
       </div>
@@ -462,7 +462,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-        className="border border-[var(--border-2)] bg-[var(--bg-1)] p-8">
+        className="border border-[var(--border-2)] bg-[var(--bg-1)] p-8 rounded-lg">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="space-y-3 min-w-0 flex-1">
             <div className="flex items-center gap-3 flex-wrap">
@@ -482,7 +482,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
           <div className="flex items-center gap-2 shrink-0">
             <CopyBtn text={JSON.stringify(analysis, null, 2)} />
             <button onClick={onReset}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-[var(--text-2)] border border-[var(--border-3)] hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors">
+              className="flex items-center gap-2 px-3 py-2 text-sm text-[var(--text-2)] border border-[var(--border-3)] hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors rounded-lg">
               <RotateCcw className="w-4 h-4" /> Nouvelle analyse
             </button>
           </div>
@@ -516,7 +516,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
               { key: 'database', icon: Database, label: 'Base de données' },
               { key: 'hosting',  icon: Cloud,    label: 'Hébergement'     },
             ].filter(s => analysis.stack?.[s.key]?.name).map(({ key, icon: Icon, label }) => (
-              <div key={key} className="border border-[var(--border-2)] p-4 space-y-2 bg-[var(--bg-1)]">
+              <div key={key} className="border border-[var(--border-2)] p-4 space-y-2 bg-[var(--bg-1)] rounded-lg">
                 <div className="flex items-center gap-3">
                   <Icon className="w-4 h-4 text-[var(--accent)] shrink-0" />
                   <span className="text-xs label-mono text-[var(--text-3)]">{label}</span>
@@ -533,7 +533,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
             ))}
 
             {analysis.stack?.tools?.length > 0 && (
-              <div className="border border-[var(--border-2)] p-4 bg-[var(--bg-1)]">
+              <div className="border border-[var(--border-2)] p-4 bg-[var(--bg-1)] rounded-lg">
                 <div className="flex items-center gap-2 mb-3">
                   <Wrench className="w-4 h-4 text-[var(--accent)]" />
                   <span className="text-sm font-semibold text-[var(--text-1)]">Outils & services</span>
@@ -541,7 +541,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
                 <div className="flex flex-wrap gap-2">
                   {analysis.stack.tools.map((t, i) => (
                     <span key={i} title={t.purpose}
-                      className="px-3 py-1.5 text-sm font-mono border border-[var(--border-3)] text-[var(--text-1)] cursor-default hover:border-[var(--border-3)] transition-colors">
+                      className="px-3 py-1.5 text-sm font-mono border border-[var(--border-3)] text-[var(--text-1)] cursor-default hover:border-[var(--border-3)] transition-colors rounded-lg">
                       {t.name}
                     </span>
                   ))}
@@ -585,7 +585,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
             </table>
 
             {analysis.budget?.paymentSchedule && (
-              <div className="border border-[var(--border-2)] p-4 space-y-3 bg-[var(--bg-1)]">
+              <div className="border border-[var(--border-2)] p-4 space-y-3 bg-[var(--bg-1)] rounded-lg">
                 <p className="text-sm font-semibold text-[var(--text-1)]">Échéancier recommandé</p>
                 {Object.values(analysis.budget.paymentSchedule).map((p, i) => (
                   <div key={i} className="flex items-center justify-between">
@@ -631,7 +631,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
                 {phase.deliverables?.length > 0 && (
                   <div className="flex flex-wrap gap-2 pl-9">
                     {phase.deliverables.map((d, j) => (
-                      <span key={j} className="text-xs font-mono px-2.5 py-1 bg-[var(--bg-2)] border border-[var(--border-2)] text-[var(--text-2)]">
+                      <span key={j} className="text-xs font-mono px-2.5 py-1 bg-[var(--bg-2)] border border-[var(--border-2)] text-[var(--text-2)] rounded-lg">
                         {d}
                       </span>
                     ))}
@@ -698,7 +698,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
         <SectionCard title="Livrables finaux" icon={Layers} defaultOpen={false}>
           <div className="flex flex-wrap gap-3 mt-3">
             {analysis.deliverables.map((d, i) => (
-              <span key={i} className="flex items-center gap-2 px-4 py-2 border border-[var(--border-3)] text-sm text-[var(--text-1)] hover:border-[var(--border-3)] transition-colors">
+              <span key={i} className="flex items-center gap-2 px-4 py-2 border border-[var(--border-3)] text-sm text-[var(--text-1)] hover:border-[var(--border-3)] transition-colors rounded-lg">
                 <Check className="w-4 h-4 text-emerald-400" />
                 {d}
               </span>
@@ -718,13 +718,13 @@ function ResultsPhase({ analysis, onReset, projectId }) {
         </button>
         <button onClick={() => setShowContractModal(true)}
           className="flex items-center gap-3 border border-[var(--border-3)] text-[var(--text-1)] px-8 py-4 text-base
-            font-medium hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors">
+            font-medium hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors rounded-lg">
           <FileText className="w-5 h-5" />
           Générer le contrat
         </button>
         <button onClick={onReset}
           className="flex items-center gap-2.5 px-6 py-4 border border-[var(--border-3)] text-[var(--text-2)]
-            hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors text-sm font-medium">
+            hover:border-[var(--border-3)] hover:text-[var(--text-1)] transition-colors text-sm font-medium rounded-lg">
           <RotateCcw className="w-4 h-4" />
           Nouvelle analyse
         </button>

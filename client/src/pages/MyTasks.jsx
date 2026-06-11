@@ -90,7 +90,7 @@ function TaskRow({ task, onToggle, onNavigate }) {
       {/* Projet */}
       <div className="min-w-0">
         <span className="inline-flex items-center gap-1.5 max-w-full px-2 py-1 text-xs"
-          style={{ border: '1px solid var(--border-2)', background: 'var(--bg-1)' }}>
+          style={{ border: '1px solid var(--border-2)', background: 'var(--bg-1)', borderRadius: '8px' }}>
           <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: dotColor(task.project.id) }} />
           <span className="text-[var(--text-1)] truncate">{task.project.name}</span>
         </span>

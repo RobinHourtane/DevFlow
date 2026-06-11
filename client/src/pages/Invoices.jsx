@@ -85,7 +85,7 @@ function CreatePanel({ projects, onCreated, onCancel }) {
     <div className="flex flex-col h-full">
       <div className="px-6 py-4 flex items-center justify-between shrink-0" style={{ borderBottom: '1px solid var(--border-1)' }}>
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg">
             <Receipt size={14} className="text-[var(--accent)]" />
           </div>
           <div>
@@ -188,7 +188,7 @@ function CreatePanel({ projects, onCreated, onCancel }) {
           </div>
 
           {/* Récap totaux */}
-          <div className="p-4 space-y-1.5" style={{ border: '1px solid var(--border-2)', background: 'var(--bg-1)' }}>
+          <div className="p-4 space-y-1.5" style={{ border: '1px solid var(--border-2)', background: 'var(--bg-1)', borderRadius: '8px' }}>
             <div className="flex items-center justify-between text-sm">
               <span className="text-[var(--text-3)]">Sous-total HT</span>
               <span className="font-mono text-[var(--text-1)]">{fmtEUR(subtotal)}</span>
@@ -224,7 +224,7 @@ function CreatePanel({ projects, onCreated, onCancel }) {
           onMouseEnter={e => !submitting && (e.currentTarget.style.background = 'var(--accent-hover)')}
           onMouseLeave={e => !submitting && (e.currentTarget.style.background = 'var(--accent)')}>
           {submitting
-            ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Création…</>
+            ? <><div className="w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" /> Création…</>
             : <><Receipt size={14} /> Créer la facture</>}
         </button>
       </div>
@@ -284,7 +284,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <h2 className="font-display text-lg text-[var(--text-1)] font-semibold truncate">{invoice.number}</h2>
-              <span className="label-mono px-2 py-0.5" style={{ border: '1px solid var(--border-2)', fontSize: '10px' }}>
+              <span className="label-mono px-2 py-0.5" style={{ border: '1px solid var(--border-2)', fontSize: '10px', borderRadius: '8px' }}>
                 {TYPE_CFG[invoice.type]?.label || invoice.type}
               </span>
             </div>
@@ -325,7 +325,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
             onMouseEnter={e => !downloading && (e.currentTarget.style.background = 'var(--accent-hover)')}
             onMouseLeave={e => !downloading && (e.currentTarget.style.background = 'var(--accent)')}>
             {downloading
-              ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Génération…</>
+              ? <><div className="w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" /> Génération…</>
               : <><Download size={13} /> Télécharger PDF</>}
           </button>
 
@@ -602,7 +602,7 @@ export default function Invoices() {
             ) : (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                 className="flex flex-col items-center justify-center h-full gap-5 text-center px-8">
-                <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)]">
+                <div className="p-4 bg-[var(--bg-2)] border border-[var(--border-2)] rounded-lg">
                   <Receipt size={24} className="text-[var(--text-4)]" />
                 </div>
                 <div>

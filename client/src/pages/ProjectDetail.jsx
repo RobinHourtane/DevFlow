@@ -99,11 +99,11 @@ const SpecBlockList = ({ label, items, mono }) => !items?.length ? null : (
 function SectionCard({ title, icon: Icon, children, defaultOpen = true }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border border-[var(--border-2)] bg-[var(--bg-1)] overflow-hidden">
+    <div className="border border-[var(--border-2)] bg-[var(--bg-1)] overflow-hidden rounded-lg">
       <button onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-[var(--hover-1)] transition-colors">
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg">
             <Icon className="w-3.5 h-3.5 text-[var(--accent)]" />
           </div>
           <span className="text-sm font-semibold text-[var(--text-1)]">{title}</span>
@@ -241,7 +241,7 @@ function PhaseColumn({ phase, onAddTask, onUpdateTask, onDeleteTask, onUpdatePha
             <input autoFocus value={newTask} onChange={e => setNewTask(e.target.value)}
               placeholder="Titre de la tâche..."
               className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-xs px-3 py-2 outline-none placeholder-neutral-700 mb-1.5"
-              style={{ border: '1px solid var(--accent)' }} />
+              style={{ border: '1px solid var(--accent)', borderRadius: '8px' }} />
             <div className="flex gap-1.5">
               <button type="submit" className="label-mono px-2 py-1 text-[var(--text-1)]" style={{ background: 'var(--accent)', borderRadius: '8px' }}>Ajouter</button>
               <button type="button" onClick={() => setAdding(false)} className="label-mono px-2 py-1 text-[var(--text-4)] hover:text-[var(--text-1)]">Annuler</button>
@@ -378,9 +378,9 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
 
   if (!analysis) {
     return (
-      <div className="mx-8 mb-8 border border-[var(--border-2)] bg-[var(--bg-1)] p-6 flex items-center justify-between gap-4">
+      <div className="mx-8 mb-8 border border-[var(--border-2)] bg-[var(--bg-1)] p-6 flex items-center justify-between gap-4 rounded-lg">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-[var(--bg-2)] border border-[var(--border-2)]">
+          <div className="p-2 bg-[var(--bg-2)] border border-[var(--border-2)] rounded-lg">
             <Sparkles size={16} className="text-[var(--text-4)]" />
           </div>
           <div>
@@ -403,7 +403,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
   return (
     <div className="px-8 pb-8 space-y-3">
       {/* Bandeau résumé */}
-      <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-5">
+      <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-5 rounded-lg">
         <div className="flex items-center gap-3 flex-wrap mb-3">
           <span className={`px-3 py-1 text-xs font-semibold border ${complexity.color} ${complexity.bg} ${complexity.border}`}>
             Complexité {complexity.label}
@@ -439,7 +439,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
               { key: 'database', icon: Database, label: 'BDD'        },
               { key: 'hosting',  icon: Cloud,    label: 'Hébergement'},
             ].filter(s => analysis.stack?.[s.key]?.name).map(({ key, icon: Icon, label }) => (
-              <div key={key} className="flex items-center gap-2.5 border border-[var(--border-2)] px-3 py-2.5 bg-[var(--bg-1)]">
+              <div key={key} className="flex items-center gap-2.5 border border-[var(--border-2)] px-3 py-2.5 bg-[var(--bg-1)] rounded-lg">
                 <Icon className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
                 <span className="label-mono text-[var(--text-3)] text-xs w-20 shrink-0">{label}</span>
                 <span className="font-mono text-sm font-semibold text-[var(--text-1)]">{analysis.stack[key].name}</span>
@@ -452,7 +452,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {analysis.stack.tools.map((t, i) => (
                   <span key={i} title={t.purpose}
-                    className="px-2 py-0.5 text-xs font-mono border border-[var(--border-3)] text-[var(--text-3)]">
+                    className="px-2 py-0.5 text-xs font-mono border border-[var(--border-3)] text-[var(--text-3)] rounded-lg">
                     {t.name}
                   </span>
                 ))}
@@ -864,7 +864,7 @@ function TabAgents({ project, onReload }) {
                   <p className="text-sm font-semibold text-[var(--text-1)]">{s.title}</p>
 
                   {!project.phases?.length && (
-                    <div className="flex items-center justify-between gap-4 px-5 py-4 border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex-wrap">
+                    <div className="flex items-center justify-between gap-4 px-5 py-4 border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex-wrap rounded-lg">
                       <div className="flex items-center gap-3 min-w-0">
                         <Sparkles size={15} className="text-[var(--accent)] shrink-0" />
                         <div className="min-w-0">
@@ -990,7 +990,7 @@ function TabAgents({ project, onReload }) {
             {result.type === 'email' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                  <div className="flex-1 px-4 py-3 text-sm" style={{ border: '1px solid var(--border-2)', background: 'rgba(0,71,255,0.05)' }}>
+                  <div className="flex-1 px-4 py-3 text-sm" style={{ border: '1px solid var(--border-2)', background: 'rgba(0,71,255,0.05)', borderRadius: '8px' }}>
                     <span className="label-mono mr-3">Objet</span>
                     <span className="text-[var(--text-1)] font-medium">{result.data.subject}</span>
                   </div>
@@ -1004,7 +1004,7 @@ function TabAgents({ project, onReload }) {
                   </a>
                 </div>
                 <pre className="text-sm text-[var(--text-1)] leading-relaxed whitespace-pre-wrap font-sans p-4 overflow-auto max-h-80"
-                  style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)' }}>
+                  style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)', borderRadius: '8px' }}>
                   {result.data.body}
                 </pre>
                 {result.data.tips?.length > 0 && (
@@ -1027,7 +1027,7 @@ function TabAgents({ project, onReload }) {
                   <div style={{ borderTop: '1px solid var(--border-1)', paddingTop: '12px' }}>
                     <div className="label-mono mb-2">README.md</div>
                     <pre className="text-xs text-[var(--text-2)] leading-relaxed whitespace-pre-wrap font-mono p-3 max-h-48 overflow-auto"
-                      style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)' }}>
+                      style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)', borderRadius: '8px' }}>
                       {result.data.readme}
                     </pre>
                   </div>
@@ -1163,7 +1163,7 @@ function StructureQuick({ project, onRun }) {
           className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2.5 outline-none"
           style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} placeholder="Ex : React + Node.js + PostgreSQL" />
       </div>
-      <div className="px-3 py-2.5 text-xs text-[var(--text-3)]" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)' }}>
+      <div className="px-3 py-2.5 text-xs text-[var(--text-3)]" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)', borderRadius: '8px' }}>
         <div className="label-mono mb-1">Projet détecté</div>
         <div className="text-[var(--text-2)]">{project.name} · {TYPE_LABEL[project.type]}</div>
       </div>
@@ -1265,7 +1265,7 @@ export default function ProjectDetail() {
           {project.driveFolderUrl ? (
             <a href={project.driveFolderUrl} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 label-mono hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)', padding: '6px 12px', color: 'inherit', textDecoration: 'none' }}>
+              style={{ border: '1px solid var(--border-2)', padding: '6px 12px', color: 'inherit', textDecoration: 'none', borderRadius: '8px' }}>
               <HardDrive size={12} style={{ color: '#4ade80' }} />
               <span style={{ color: '#4ade80' }}>Drive</span>
               <ExternalLink size={10} />
@@ -1273,7 +1273,7 @@ export default function ProjectDetail() {
           ) : (
             <button onClick={handleCreateDriveFolder} disabled={driveLoading}
               className="flex items-center gap-1.5 label-mono transition-colors hover:text-[var(--text-1)] disabled:opacity-50"
-              style={{ border: '1px solid var(--border-2)', padding: '6px 12px' }}>
+              style={{ border: '1px solid var(--border-2)', padding: '6px 12px', borderRadius: '8px' }}>
               {driveLoading
                 ? <Loader2 size={12} className="animate-spin" />
                 : <HardDrive size={12} />}
@@ -1285,7 +1285,7 @@ export default function ProjectDetail() {
             <button
               onClick={() => navigate(`/contracts?id=${project.contracts[0].id}`)}
               className="flex items-center gap-1.5 label-mono hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)', padding: '6px 12px' }}>
+              style={{ border: '1px solid var(--border-2)', padding: '6px 12px', borderRadius: '8px' }}>
               <FileText size={12} />
               {project.contracts.length} contrat{project.contracts.length > 1 ? 's' : ''}
               <ExternalLink size={10} />

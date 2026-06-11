@@ -119,7 +119,7 @@ export default function GlobalSearch({ open, onClose }) {
         exit={{ opacity: 0, y: -8, scale: 0.97 }}
         transition={{ duration: 0.15 }}
         className="w-full max-w-xl bg-[var(--bg-1)]"
-        style={{ border: '1px solid var(--border-2)', boxShadow: '0 24px 60px rgba(0,0,0,0.6)' }}>
+        style={{ border: '1px solid var(--border-2)', boxShadow: '0 24px 60px rgba(0,0,0,0.6)', borderRadius: '8px' }}>
 
         {/* Input */}
         <div className="flex items-center gap-3 px-4 py-3.5" style={{ borderBottom: results.length > 0 || loading ? '1px solid var(--border-1)' : 'none' }}>
@@ -134,7 +134,7 @@ export default function GlobalSearch({ open, onClose }) {
               <X size={14} />
             </button>
           )}
-          <kbd className="label-mono px-1.5 py-0.5 text-[var(--text-5)]" style={{ border: '1px solid var(--border-2)', fontSize: '10px' }}>Esc</kbd>
+          <kbd className="label-mono px-1.5 py-0.5 text-[var(--text-5)]" style={{ border: '1px solid var(--border-2)', fontSize: '10px', borderRadius: '4px' }}>Esc</kbd>
         </div>
 
         {/* Résultats */}
@@ -173,15 +173,15 @@ export default function GlobalSearch({ open, onClose }) {
         {/* Footer */}
         <div className="px-4 py-2.5 flex items-center gap-4" style={{ borderTop: '1px solid var(--bg-2)' }}>
           <span className="label-mono flex items-center gap-1.5">
-            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px' }}>↑↓</kbd>
+            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px', borderRadius: '4px' }}>↑↓</kbd>
             naviguer
           </span>
           <span className="label-mono flex items-center gap-1.5">
-            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px' }}>↵</kbd>
+            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px', borderRadius: '4px' }}>↵</kbd>
             ouvrir
           </span>
           <span className="label-mono flex items-center gap-1.5">
-            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px' }}>Esc</kbd>
+            <kbd style={{ padding: '1px 5px', border: '1px solid var(--border-3)', fontSize: '10px', borderRadius: '4px' }}>Esc</kbd>
             fermer
           </span>
         </div>

@@ -105,7 +105,7 @@ function EventDetail({ event, onClose }) {
       initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 16 }}
-      className="bg-[var(--bg-1)] border border-[var(--border-2)] p-4 space-y-3"
+      className="bg-[var(--bg-1)] border border-[var(--border-2)] p-4 space-y-3 rounded-lg"
     >
       <div className="flex items-start justify-between">
         <div className={`p-2 ${meta.bg}`}>
@@ -185,7 +185,7 @@ function EventDetail({ event, onClose }) {
       {event.projectId && (
         <button
           onClick={() => navigate(`/projects/${event.projectId}`)}
-          className="w-full text-xs label-mono text-[var(--accent)] border border-[var(--accent)]/30 py-2 hover:bg-[var(--accent)]/10 transition-colors"
+          className="w-full text-xs label-mono text-[var(--accent)] border border-[var(--accent)]/30 py-2 hover:bg-[var(--accent)]/10 transition-colors rounded-lg"
         >
           Voir le projet →
         </button>
@@ -307,7 +307,7 @@ export default function Calendar() {
 
       <div className="grid grid-cols-[1fr_280px] gap-4 items-start">
         {/* ── Calendrier ──────────────────────────────────────────────────── */}
-        <div className="border border-[var(--border-2)] bg-[var(--bg-1)]">
+        <div className="border border-[var(--border-2)] bg-[var(--bg-1)] rounded-lg">
           {/* Navigation mois */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border-2)]">
             <button
@@ -341,7 +341,7 @@ export default function Calendar() {
           {/* Grille */}
           {loading ? (
             <div className="h-64 flex items-center justify-center">
-              <div className="w-6 h-6 border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+              <div className="w-6 h-6 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
             </div>
           ) : (
             <div className="grid grid-cols-7">
@@ -389,7 +389,7 @@ export default function Calendar() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4"
+              className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4 rounded-lg"
             >
               <p className="label-mono text-[var(--text-3)] mb-3 capitalize">
                 {format(selectedDay, 'd MMMM yyyy', { locale: fr })}
@@ -429,7 +429,7 @@ export default function Calendar() {
           )}
 
           {/* Deadlines à venir (30 jours) */}
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4 rounded-lg">
             <p className="label-mono text-[var(--text-3)] mb-3">Deadlines à venir</p>
             {upcoming.length === 0 ? (
               <p className="text-[var(--text-4)] text-sm">Aucune deadline dans les 30 jours.</p>
@@ -463,7 +463,7 @@ export default function Calendar() {
           </div>
 
           {/* Légende */}
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] p-4 rounded-lg">
             <p className="label-mono text-[var(--text-3)] mb-3">Légende</p>
             <div className="space-y-2">
               {[

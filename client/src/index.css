@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-/* Variante dark basée sur une classe (utilisée par la page Loans) */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* Bascule de thème en cercle (View Transitions API) */
 ::view-transition-old(root),
 ::view-transition-new(root) {

@@ -17,7 +17,7 @@ function Section({ icon: Icon, title, description, children }) {
   return (
     <section className="p-10" style={{ borderBottom: '1px solid var(--border-1)' }}>
       <div className="flex items-start gap-4 mb-6 max-w-2xl">
-        <div className="p-2 shrink-0" style={{ background: 'color-mix(in srgb, var(--accent) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 19%, transparent)' }}>
+        <div className="p-2 shrink-0" style={{ background: 'color-mix(in srgb, var(--accent) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 19%, transparent)', borderRadius: '8px' }}>
           <Icon size={16} style={{ color: 'var(--accent)' }} />
         </div>
         <div>
@@ -132,7 +132,7 @@ export default function Settings() {
             </div>
             <div>
               <label className={labelCls}>Rôle</label>
-              <div className="px-3 py-2.5 text-sm text-[var(--text-3)] font-mono" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-1)' }}>
+              <div className="px-3 py-2.5 text-sm text-[var(--text-3)] font-mono" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-1)', borderRadius: '8px' }}>
                 {ROLE_LABEL[user?.role] || user?.role}
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function Settings() {
 
       {/* Intégrations */}
       <Section icon={HardDrive} title="Intégrations" description="État des services tiers connectés à DevFlow.">
-        <div className="flex items-center justify-between px-4 py-3" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-1)' }}>
+        <div className="flex items-center justify-between px-4 py-3" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-1)', borderRadius: '8px' }}>
           <div className="flex items-center gap-3">
             <HardDrive size={16} className="text-[var(--text-2)]" />
             <div>
@@ -196,7 +196,7 @@ export default function Settings() {
             </div>
           </div>
           <span className="label-mono px-2.5 py-1 text-xs flex items-center gap-1.5"
-            style={{ background: '#16a34a15', border: '1px solid #16a34a30', color: '#16a34a' }}>
+            style={{ background: '#16a34a15', border: '1px solid #16a34a30', color: '#16a34a', borderRadius: '8px' }}>
             <ShieldCheck size={12} />
             Connecté
           </span>

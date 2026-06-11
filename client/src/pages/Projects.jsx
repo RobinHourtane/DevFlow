@@ -30,7 +30,7 @@ function ProjectCard({ project, onClick, onDelete }) {
       style={{ transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.4 : 1 }}>
       <div
         className="bg-[var(--bg-0)] p-4 cursor-pointer hover:bg-[var(--hover-1)] transition-colors group"
-        style={{ border: '1px solid var(--border-1)', marginBottom: '1px' }}
+        style={{ border: '1px solid var(--border-1)', marginBottom: '1px', borderRadius: '8px' }}
         onClick={onClick}>
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-start gap-2 min-w-0">
@@ -301,7 +301,7 @@ export default function Projects() {
           {archivedCount > 0 && (
             <button onClick={() => setShowArchived(s => !s)}
               className={`label-mono px-3 py-2 transition-colors ${showArchived ? 'text-[var(--text-1)]' : 'text-[var(--text-3)] hover:text-[var(--text-1)]'}`}
-              style={{ border: '1px solid var(--border-2)', background: showArchived ? 'var(--bg-1)' : 'transparent' }}>
+              style={{ border: '1px solid var(--border-2)', background: showArchived ? 'var(--bg-1)' : 'transparent', borderRadius: '8px' }}>
               {showArchived ? 'Masquer' : 'Afficher'} les archivés ({archivedCount})
             </button>
           )}

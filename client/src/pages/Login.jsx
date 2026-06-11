@@ -33,7 +33,7 @@ export default function Login() {
 
         {error && (
           <div className="text-sm text-red-400 px-4 py-3 mb-6"
-            style={{ border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)' }}>
+            style={{ border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.05)', borderRadius: '8px' }}>
             {error}
           </div>
         )}

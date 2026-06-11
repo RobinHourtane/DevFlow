@@ -165,7 +165,7 @@ export default function ContractGeneratorModal({ analysis, onClose }) {
         <div className="flex items-center justify-between px-6 py-4 shrink-0"
           style={{ borderBottom: '1px solid var(--border-1)' }}>
           <div className="flex items-center gap-3">
-            <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+            <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg">
               <FileText className="w-4 h-4 text-[var(--accent)]" />
             </div>
             <div>
@@ -308,12 +308,12 @@ export default function ContractGeneratorModal({ analysis, onClose }) {
               <motion.div key="gen"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 className="flex flex-col items-center justify-center gap-5 py-16 px-6">
-                <div className="w-10 h-10 border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+                <div className="w-10 h-10 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
                 <p className="font-display text-lg text-[var(--text-1)] font-semibold">Rédaction du contrat…</p>
                 <p className="text-[var(--text-3)] text-sm text-center max-w-xs">
                   L'IA génère un contrat professionnel adapté à votre projet. Cela prend 10 à 20 secondes.
                 </p>
-                <div className="flex items-center gap-2 px-4 py-2 border border-[var(--accent)]/30 bg-[var(--accent)]/8">
+                <div className="flex items-center gap-2 px-4 py-2 border border-[var(--accent)]/30 bg-[var(--accent)]/8 rounded-lg">
                   <Sparkles size={13} className="text-[var(--accent)]" />
                   <span className="label-mono text-[var(--accent)]">{analysis.projectName}</span>
                 </div>
@@ -344,7 +344,7 @@ export default function ContractGeneratorModal({ analysis, onClose }) {
                 </div>
 
                 {/* Contenu Markdown */}
-                <div className="p-6 overflow-auto" style={{ border: '1px solid var(--bg-2)', background: 'var(--bg-0)', maxHeight: '55vh' }}>
+                <div className="p-6 overflow-auto" style={{ border: '1px solid var(--bg-2)', background: 'var(--bg-0)', maxHeight: '55vh', borderRadius: '8px' }}>
                   <SimpleMarkdown content={contractContent} />
                 </div>
               </motion.div>
