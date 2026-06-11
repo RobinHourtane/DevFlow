@@ -15,7 +15,7 @@ import {
 const PRIORITY_CFG = Object.fromEntries(
   Object.keys(TASK_PRIORITY_LABEL).map(k => [k, { label: TASK_PRIORITY_LABEL[k], color: TASK_PRIORITY_COLOR[k] }])
 );
-const PROJECT_DOT_COLORS = ['#0047FF', '#22c55e', '#eab308', '#ef4444', '#a855f7', '#06b6d4', '#f97316', '#ec4899'];
+const PROJECT_DOT_COLORS = ['var(--accent)', '#22c55e', '#eab308', '#ef4444', '#a855f7', '#06b6d4', '#f97316', '#ec4899'];
 const dotColor = (id) => PROJECT_DOT_COLORS[id % PROJECT_DOT_COLORS.length];
 
 // ─── Regroupement façon "Mes tâches" Asana ───────────────────────────────────
@@ -180,7 +180,7 @@ export default function MyTasks() {
         title="Mes tâches"
         description="Toutes les tâches de tous vos projets, regroupées par échéance — comme dans Asana."
         actions={
-          <div className="label-mono flex items-center gap-2 px-4 py-2" style={{ border: '1px solid var(--border-2)' }}>
+          <div className="label-mono flex items-center gap-2 px-4 py-2" style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
             <ListChecks size={13} />
             {pending} en cours
           </div>
@@ -189,14 +189,14 @@ export default function MyTasks() {
 
       {tasks.length === 0 ? (
         <div className="p-10">
-          <div className="text-sm text-[var(--text-3)] p-8 text-center" style={{ border: '1px dashed var(--border-2)' }}>
+          <div className="text-sm text-[var(--text-3)] p-8 text-center" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>
             Aucune tâche pour l'instant. Crée des tâches depuis la fiche d'un projet — elles apparaîtront ici, triées par échéance.
           </div>
         </div>
       ) : (
         <div>
           <Section title="En retard"             count={groups.late.items.length}  items={groups.late.items}  accent="#ef4444" onToggle={handleToggle} onNavigate={goToProject} />
-          <Section title="À faire aujourd'hui"   count={groups.today.items.length} items={groups.today.items} accent="#0047FF" onToggle={handleToggle} onNavigate={goToProject} />
+          <Section title="À faire aujourd'hui"   count={groups.today.items.length} items={groups.today.items} accent="var(--accent)" onToggle={handleToggle} onNavigate={goToProject} />
           <Section title="À faire cette semaine" count={groups.week.items.length}  items={groups.week.items}  onToggle={handleToggle} onNavigate={goToProject} />
           <Section title="À faire plus tard"     count={groups.later.items.length} items={groups.later.items} onToggle={handleToggle} onNavigate={goToProject} />
           <Section title="Terminées"             count={groups.done.items.length}  items={groups.done.items}  defaultOpen={false} accent="#22c55e" onToggle={handleToggle} onNavigate={goToProject} />

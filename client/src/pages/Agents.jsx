@@ -58,8 +58,8 @@ function SectionCard({ title, icon: Icon, children, defaultOpen = true }) {
         className="w-full flex items-center justify-between px-6 py-4 hover:bg-[var(--hover-1)] transition-colors"
       >
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[#0047FF]/10 border border-[#0047FF]/20">
-            <Icon className="w-4 h-4 text-[#0047FF]" />
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+            <Icon className="w-4 h-4 text-[var(--accent)]" />
           </div>
           <span className="text-base font-semibold text-[var(--text-1)]">{title}</span>
         </div>
@@ -108,9 +108,9 @@ function InputPhase({ onSubmit, error }) {
     <div className="max-w-3xl mx-auto px-10 py-8 space-y-8">
       {/* Intro */}
       <div className="text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 border border-[#0047FF]/40 bg-[#0047FF]/10">
-          <Sparkles className="w-4 h-4 text-[#0047FF]" />
-          <span className="text-sm font-medium text-[#0047FF]">Analyse complète en 1 clic</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--accent)]/40 bg-[var(--accent)]/10">
+          <Sparkles className="w-4 h-4 text-[var(--accent)]" />
+          <span className="text-sm font-medium text-[var(--accent)]">Analyse complète en 1 clic</span>
         </div>
         <h2 className="font-display text-3xl text-[var(--text-1)] font-semibold leading-tight">
           Colle le cahier des charges de ton client
@@ -122,7 +122,7 @@ function InputPhase({ onSubmit, error }) {
 
       <form onSubmit={submit} className="space-y-5">
         {/* Textarea */}
-        <div className="border border-[var(--border-3)] focus-within:border-[#0047FF]/70 transition-colors bg-[var(--bg-1)]">
+        <div className="border border-[var(--border-3)] focus-within:border-[var(--accent)]/70 transition-colors bg-[var(--bg-1)]">
           <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-2)]">
             <span className="label-mono text-[var(--text-2)]">Cahier des charges *</span>
             <span className="text-sm text-[var(--text-4)] font-mono">{brief.length} car.</span>
@@ -139,7 +139,7 @@ function InputPhase({ onSubmit, error }) {
 
         {/* Lier à un projet */}
         {projects.length > 0 && (
-          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[#0047FF]/60 transition-colors">
+          <div className="border border-[var(--border-2)] bg-[var(--bg-1)] focus-within:border-[var(--accent)]/60 transition-colors">
             <div className="px-4 py-2.5 border-b border-[var(--border-2)] flex items-center justify-between">
               <span className="label-mono text-[var(--text-2)]">Lier à un projet</span>
               <span className="text-xs text-[var(--text-4)]">optionnel — crée les phases &amp; tâches automatiquement</span>
@@ -188,8 +188,8 @@ function InputPhase({ onSubmit, error }) {
         )}
 
         <button type="submit" disabled={brief.trim().length < 30}
-          className="w-full flex items-center justify-center gap-3 bg-[#0047FF] text-[var(--text-1)] py-4 text-base
-            font-display font-semibold hover:bg-[#0035cc] disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+          className="w-full flex items-center justify-center gap-3 bg-[var(--accent)] text-[var(--text-1)] py-4 text-base
+            font-display font-semibold hover:bg-[var(--accent-hover)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
           <Sparkles className="w-5 h-5" />
           Analyser le projet
           <ArrowRight className="w-5 h-5" />
@@ -236,7 +236,7 @@ function LoadingPhase() {
   return (
     <div className="max-w-lg mx-auto px-10 py-20 space-y-10">
       <div className="text-center space-y-4">
-        <div className="w-12 h-12 border-2 border-[#0047FF] border-t-transparent animate-spin mx-auto" />
+        <div className="w-12 h-12 border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
         <p className="font-display text-2xl text-[var(--text-1)] font-semibold">Analyse en cours…</p>
         <p className="text-[var(--text-3)] text-base">L'IA traite votre cahier des charges, cela prend 5 à 15 secondes.</p>
       </div>
@@ -252,19 +252,19 @@ function LoadingPhase() {
               transition={{ delay: i * 0.07 }}
               className={`flex items-center gap-4 px-5 py-3.5 border transition-all
                 ${done   ? 'border-emerald-500/30 bg-emerald-500/5'   :
-                  active ? 'border-[#0047FF]/50 bg-[#0047FF]/8'       :
+                  active ? 'border-[var(--accent)]/50 bg-[var(--accent)]/8'       :
                            'border-[var(--border-2)] bg-transparent'}`}
             >
               {done
                 ? <Check className="w-5 h-5 text-emerald-400 shrink-0" />
-                : <Icon  className={`w-5 h-5 shrink-0 ${active ? 'text-[#0047FF]' : 'text-[var(--text-5)]'}`} />}
+                : <Icon  className={`w-5 h-5 shrink-0 ${active ? 'text-[var(--accent)]' : 'text-[var(--text-5)]'}`} />}
               <span className={`text-base ${done ? 'text-emerald-400' : active ? 'text-[var(--text-1)] font-medium' : 'text-[var(--text-4)]'}`}>
                 {s.label}
               </span>
               {active && (
                 <div className="ml-auto flex gap-1">
                   {[0, 1, 2].map(d => (
-                    <motion.div key={d} className="w-1.5 h-1.5 bg-[#0047FF] rounded-full"
+                    <motion.div key={d} className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full"
                       animate={{ opacity: [0.2, 1, 0.2] }}
                       transition={{ duration: 0.9, repeat: Infinity, delay: d * 0.2 }} />
                   ))}
@@ -332,11 +332,11 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}
-      className="border border-[#0047FF]/30 bg-[#0047FF]/5">
+      className="border border-[var(--accent)]/30 bg-[var(--accent)]/5">
       <div className="flex items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="p-1.5 bg-[#0047FF]/10 border border-[#0047FF]/20 shrink-0">
-            <Users className="w-4 h-4 text-[#0047FF]" />
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 shrink-0">
+            <Users className="w-4 h-4 text-[var(--accent)]" />
           </div>
           <div className="min-w-0">
             <p className="text-sm font-semibold text-[var(--text-1)] truncate">Client détecté : {suggestion.name}</p>
@@ -344,7 +344,7 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
           </div>
         </div>
         <button onClick={() => setOpen(o => !o)}
-          className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#0047FF] border border-[#0047FF]/40 hover:bg-[#0047FF]/10 transition-colors">
+          className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--accent)] border border-[var(--accent)]/40 hover:bg-[var(--accent)]/10 transition-colors">
           {open ? 'Annuler' : 'Créer la fiche client'}
         </button>
       </div>
@@ -353,31 +353,31 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.18 }} className="overflow-hidden">
-            <form onSubmit={submit} className="px-6 pb-5 pt-1 border-t border-[#0047FF]/15 grid grid-cols-2 gap-3">
+            <form onSubmit={submit} className="px-6 pb-5 pt-1 border-t border-[var(--accent)]/15 grid grid-cols-2 gap-3">
               <div>
                 <label className="label-mono block mb-1.5 text-[var(--text-3)]">Nom *</label>
                 <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors"
-                  style={{ border: '1px solid var(--border-2)' }} />
+                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors"
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
               </div>
               <div>
                 <label className="label-mono block mb-1.5 text-[var(--text-3)]">Email *</label>
                 <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="contact@client.fr"
-                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors"
-                  style={{ border: '1px solid var(--border-2)' }} />
+                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors"
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
               </div>
               <div>
                 <label className="label-mono block mb-1.5 text-[var(--text-3)]">Entreprise</label>
                 <input value={form.company} onChange={e => setForm({ ...form, company: e.target.value })}
-                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors"
-                  style={{ border: '1px solid var(--border-2)' }} />
+                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors"
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
               </div>
               <div>
                 <label className="label-mono block mb-1.5 text-[var(--text-3)]">Secteur</label>
                 <input value={form.sector} onChange={e => setForm({ ...form, sector: e.target.value })}
-                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors"
-                  style={{ border: '1px solid var(--border-2)' }} />
+                  className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors"
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
               </div>
 
               {error && (
@@ -389,7 +389,7 @@ function ClientSuggestionBanner({ suggestion, projectId, onCreated }) {
               <div className="col-span-2 flex justify-end">
                 <button type="submit" disabled={status === 'saving'}
                   className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-50"
-                  style={{ background: '#0047FF' }}>
+                  style={{ background: 'var(--accent)', borderRadius: '8px' }}>
                   <Plus className="w-4 h-4" />
                   {status === 'saving' ? 'Création…' : `Créer${projectId ? ' et lier au projet' : ''}`}
                 </button>
@@ -518,7 +518,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
             ].filter(s => analysis.stack?.[s.key]?.name).map(({ key, icon: Icon, label }) => (
               <div key={key} className="border border-[var(--border-2)] p-4 space-y-2 bg-[var(--bg-1)]">
                 <div className="flex items-center gap-3">
-                  <Icon className="w-4 h-4 text-[#0047FF] shrink-0" />
+                  <Icon className="w-4 h-4 text-[var(--accent)] shrink-0" />
                   <span className="text-xs label-mono text-[var(--text-3)]">{label}</span>
                   <span className="ml-auto font-mono text-base font-semibold text-[var(--text-1)]">
                     {analysis.stack[key].name}
@@ -535,7 +535,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
             {analysis.stack?.tools?.length > 0 && (
               <div className="border border-[var(--border-2)] p-4 bg-[var(--bg-1)]">
                 <div className="flex items-center gap-2 mb-3">
-                  <Wrench className="w-4 h-4 text-[#0047FF]" />
+                  <Wrench className="w-4 h-4 text-[var(--accent)]" />
                   <span className="text-sm font-semibold text-[var(--text-1)]">Outils & services</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -579,7 +579,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
                 <tr className="border-t-2 border-[var(--border-3)]">
                   <td className="pt-4 text-sm font-semibold text-[var(--text-1)]">Total HT</td>
                   <td className="pt-4 text-right font-mono text-sm text-[var(--text-2)]">{totalDays}j</td>
-                  <td className="pt-4 text-right font-mono text-lg font-bold text-[#0047FF]">{fmt(analysis.budget?.totalHT)} €</td>
+                  <td className="pt-4 text-right font-mono text-lg font-bold text-[var(--accent)]">{fmt(analysis.budget?.totalHT)} €</td>
                 </tr>
               </tfoot>
             </table>
@@ -590,7 +590,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
                 {Object.values(analysis.budget.paymentSchedule).map((p, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="w-1 h-5 bg-[#0047FF] shrink-0" />
+                      <span className="w-1 h-5 bg-[var(--accent)] shrink-0" />
                       <span className="text-sm text-[var(--text-2)]">{p.label}</span>
                     </div>
                     <span className="text-sm font-mono font-semibold text-[var(--text-1)]">{p.percent}% — {fmt(p.amount)} €</span>
@@ -621,7 +621,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
                 </div>
                 <div className="flex items-center gap-3 pl-9">
                   <div className="flex-1 h-2 bg-[var(--bg-3)]">
-                    <motion.div className="h-full bg-[#0047FF]"
+                    <motion.div className="h-full bg-[var(--accent)]"
                       initial={{ width: 0 }}
                       animate={{ width: `${pct}%` }}
                       transition={{ duration: 0.5, delay: i * 0.08 }} />
@@ -671,7 +671,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
             <ul className="space-y-3 mt-3">
               {analysis.recommendations?.map((r, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Check className="w-4 h-4 text-[#0047FF] shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-sm text-[var(--text-1)] leading-relaxed">{r}</span>
                 </li>
               ))}
@@ -683,7 +683,7 @@ function ResultsPhase({ analysis, onReset, projectId }) {
               <ul className="space-y-3 mt-3">
                 {analysis.questions.map((q, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="text-sm font-mono font-bold text-[#0047FF] shrink-0">{i + 1}.</span>
+                    <span className="text-sm font-mono font-bold text-[var(--accent)] shrink-0">{i + 1}.</span>
                     <span className="text-sm text-[var(--text-2)] leading-relaxed">{q}</span>
                   </li>
                 ))}
@@ -711,8 +711,8 @@ function ResultsPhase({ analysis, onReset, projectId }) {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
         className="flex items-center justify-center gap-4 py-6 border-t border-[var(--border-2)] flex-wrap">
         <button onClick={handleCreateProject}
-          className="flex items-center gap-3 bg-[#0047FF] text-[var(--text-1)] px-8 py-4 text-base
-            font-display font-semibold hover:bg-[#0035cc] transition-colors">
+          className="flex items-center gap-3 bg-[var(--accent)] text-[var(--text-1)] px-8 py-4 text-base
+            font-display font-semibold hover:bg-[var(--accent-hover)] transition-colors">
           <Plus className="w-5 h-5" />
           Créer ce projet
         </button>

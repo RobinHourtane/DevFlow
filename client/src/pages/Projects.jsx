@@ -115,7 +115,7 @@ function CreateModal({ clients, onClose, onCreate, prefill }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center"
       style={{ background: 'rgba(0,0,0,0.7)' }} onClick={onClose}>
       <div className="w-full max-w-md bg-[var(--bg-1)] p-8"
-        style={{ border: '1px solid var(--border-2)' }}
+        style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
         onClick={e => e.stopPropagation()}>
         <div className="label-mono mb-3">Workspace / Projets</div>
         <h2 className="font-display text-2xl text-[var(--text-1)] mb-6">Nouveau projet</h2>
@@ -128,8 +128,8 @@ function CreateModal({ clients, onClose, onCreate, prefill }) {
               <input type={type} required value={form[key]}
                 onChange={e => setForm({ ...form, [key]: e.target.value })}
                 placeholder={placeholder}
-                className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[#0047FF] transition-colors"
-                style={{ border: '1px solid var(--border-2)' }} />
+                className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[var(--accent)] transition-colors"
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
             </div>
           ))}
 
@@ -138,7 +138,7 @@ function CreateModal({ clients, onClose, onCreate, prefill }) {
               <label className="label-mono block mb-2">Type</label>
               <select value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}
                 className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 {Object.entries(TYPE_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
               </select>
             </div>
@@ -146,7 +146,7 @@ function CreateModal({ clients, onClose, onCreate, prefill }) {
               <label className="label-mono block mb-2">Client</label>
               <select value={form.clientId} onChange={e => setForm({ ...form, clientId: e.target.value })}
                 className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <option value="">— Aucun —</option>
                 {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
@@ -158,21 +158,21 @@ function CreateModal({ clients, onClose, onCreate, prefill }) {
             <input type="number" value={form.budget}
               onChange={e => setForm({ ...form, budget: e.target.value })}
               placeholder="0"
-              className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[#0047FF]"
-              style={{ border: '1px solid var(--border-2)' }} />
+              className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[var(--accent)]"
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
           </div>
 
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               Annuler
             </button>
             <button type="submit"
               className="flex-1 py-2.5 text-sm text-[var(--text-1)] font-medium transition-colors"
-              style={{ background: '#0047FF' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-              onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+              style={{ background: 'var(--accent)', borderRadius: '8px' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
               Créer le projet
             </button>
           </div>
@@ -265,7 +265,7 @@ export default function Projects() {
         actions={
           <div className="flex items-center gap-2">
             {/* Toggle vue */}
-            <div className="flex" style={{ border: '1px solid var(--border-2)' }}>
+            <div className="flex" style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               <button onClick={() => setView('kanban')}
                 className={`p-2 transition-colors ${view === 'kanban' ? 'bg-[var(--bg-2)] text-[var(--text-1)]' : 'text-[var(--text-3)] hover:text-[var(--text-1)]'}`}>
                 <LayoutGrid size={15} />
@@ -278,9 +278,9 @@ export default function Projects() {
             </div>
             <button onClick={() => setModal(true)}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)]"
-              style={{ background: '#0047FF' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-              onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+              style={{ background: 'var(--accent)', borderRadius: '8px' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
               <Plus size={14} />
               Nouveau projet
             </button>
@@ -295,8 +295,8 @@ export default function Projects() {
             <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-4)]" />
             <input value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Rechercher un projet..."
-              className="w-full pl-10 pr-4 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none focus:border-[#0047FF] transition-colors"
-              style={{ border: '1px solid var(--border-2)' }} />
+              className="w-full pl-10 pr-4 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none focus:border-[var(--accent)] transition-colors"
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
           </div>
           {archivedCount > 0 && (
             <button onClick={() => setShowArchived(s => !s)}
@@ -323,7 +323,7 @@ export default function Projects() {
           </DndContext>
         ) : (
           /* Vue Liste */
-          <div style={{ border: '1px solid var(--border-1)' }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border-1)', borderRadius: '12px', overflow: 'hidden' }}>
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--border-1)' }}>

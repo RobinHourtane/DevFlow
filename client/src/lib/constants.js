@@ -34,7 +34,7 @@ export const TASK_STATUS_LABEL = {
 
 export const TASK_STATUS_CFG = {
   TODO:        { label: 'À faire',  color: 'var(--text-3)' },
-  IN_PROGRESS: { label: 'En cours', color: '#0047FF' },
+  IN_PROGRESS: { label: 'En cours', color: 'var(--accent)' },
   REVIEW:      { label: 'Révision', color: '#eab308' },
   DONE:        { label: 'Terminée', color: '#22c55e' },
 };

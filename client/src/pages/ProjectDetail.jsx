@@ -87,7 +87,7 @@ const SpecBlockList = ({ label, items, mono }) => !items?.length ? null : (
     <ul className="space-y-1">
       {items.map((it, i) => (
         <li key={i} className={`text-xs text-[var(--text-2)] flex items-start gap-2 ${mono ? 'font-mono' : ''}`}>
-          <span style={{ color: '#0047FF' }}>→</span>{it}
+          <span style={{ color: 'var(--accent)' }}>→</span>{it}
         </li>
       ))}
     </ul>
@@ -103,8 +103,8 @@ function SectionCard({ title, icon: Icon, children, defaultOpen = true }) {
       <button onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-[var(--hover-1)] transition-colors">
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[#0047FF]/10 border border-[#0047FF]/20">
-            <Icon className="w-3.5 h-3.5 text-[#0047FF]" />
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+            <Icon className="w-3.5 h-3.5 text-[var(--accent)]" />
           </div>
           <span className="text-sm font-semibold text-[var(--text-1)]">{title}</span>
         </div>
@@ -127,8 +127,8 @@ const Input = ({ label, ...props }) => (
   <div>
     {label && <label className="label-mono block mb-2">{label}</label>}
     <input {...props}
-      className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors placeholder-neutral-700"
-      style={{ border: '1px solid var(--border-2)' }} />
+      className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors placeholder-neutral-700"
+      style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
   </div>
 );
 
@@ -148,7 +148,7 @@ function TaskCard({ task, onUpdate, onDelete, highlighted }) {
     <div ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.4 : 1 }}>
       <div className="group flex items-start gap-2 px-3 py-2.5 hover:bg-[var(--hover-1)] transition-colors"
-        style={{ borderBottom: '1px solid var(--bg-2)', ...(isHighlighted ? { background: 'rgba(0,71,255,0.08)', borderLeft: '2px solid #0047FF' } : {}) }}>
+        style={{ borderBottom: '1px solid var(--bg-2)', ...(isHighlighted ? { background: 'rgba(0,71,255,0.08)', borderLeft: '2px solid var(--accent)' } : {}) }}>
         <div {...attributes} {...listeners}
           className="mt-0.5 text-[var(--text-5)] cursor-grab opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
           onClick={e => e.stopPropagation()}>
@@ -156,7 +156,7 @@ function TaskCard({ task, onUpdate, onDelete, highlighted }) {
         </div>
         <button onClick={() => onUpdate(task.id, { status: isDone ? 'TODO' : 'DONE' })}
           className="mt-0.5 shrink-0 transition-colors"
-          style={{ color: isDone ? '#0047FF' : 'var(--border-3)' }}>
+          style={{ color: isDone ? 'var(--accent)' : 'var(--border-3)' }}>
           {isDone ? <Check size={14} /> : <Circle size={14} />}
         </button>
         <div className="flex-1 min-w-0">
@@ -208,7 +208,7 @@ function PhaseColumn({ phase, onAddTask, onUpdateTask, onDeleteTask, onUpdatePha
           {editName ? (
             <input autoFocus value={phaseName} onChange={e => setPhaseName(e.target.value)}
               onBlur={handleRename} onKeyDown={e => e.key === 'Enter' && handleRename()}
-              className="flex-1 bg-transparent text-[var(--text-1)] text-xs outline-none border-b border-[#0047FF]" />
+              className="flex-1 bg-transparent text-[var(--text-1)] text-xs outline-none border-b border-[var(--accent)]" />
           ) : (
             <span className="label-mono text-[var(--text-1)] cursor-pointer hover:text-[var(--text-1)] transition-colors truncate"
               onClick={() => setEditName(true)}>{phase.name}</span>
@@ -223,7 +223,7 @@ function PhaseColumn({ phase, onAddTask, onUpdateTask, onDeleteTask, onUpdatePha
         {tasks.length > 0 && (
           <div className="flex items-center gap-2">
             <div className="flex-1 h-0.5 rounded-full" style={{ background: 'var(--bg-2)' }}>
-              <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: '#0047FF' }} />
+              <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: 'var(--accent)' }} />
             </div>
             <span className="font-mono text-xs text-[var(--text-4)]">{pct}%</span>
           </div>
@@ -241,9 +241,9 @@ function PhaseColumn({ phase, onAddTask, onUpdateTask, onDeleteTask, onUpdatePha
             <input autoFocus value={newTask} onChange={e => setNewTask(e.target.value)}
               placeholder="Titre de la tâche..."
               className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-xs px-3 py-2 outline-none placeholder-neutral-700 mb-1.5"
-              style={{ border: '1px solid #0047FF' }} />
+              style={{ border: '1px solid var(--accent)' }} />
             <div className="flex gap-1.5">
-              <button type="submit" className="label-mono px-2 py-1 text-[var(--text-1)]" style={{ background: '#0047FF' }}>Ajouter</button>
+              <button type="submit" className="label-mono px-2 py-1 text-[var(--text-1)]" style={{ background: 'var(--accent)', borderRadius: '8px' }}>Ajouter</button>
               <button type="button" onClick={() => setAdding(false)} className="label-mono px-2 py-1 text-[var(--text-4)] hover:text-[var(--text-1)]">Annuler</button>
             </div>
           </form>
@@ -295,7 +295,7 @@ function TabOverview({ project, onUpdate, onSwitchToAgents }) {
               <label className="label-mono block mb-2">Description</label>
               <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
                 rows={3} className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none resize-none placeholder-neutral-700"
-                style={{ border: '1px solid var(--border-2)' }} placeholder="Description du projet..." />
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} placeholder="Description du projet..." />
             </div>
             <div className="grid grid-cols-3 gap-3">
               <Input label="Budget (€)" type="number" value={form.budget} onChange={e => setForm({ ...form, budget: e.target.value })} />
@@ -305,11 +305,11 @@ function TabOverview({ project, onUpdate, onSwitchToAgents }) {
             <div>
               <label className="label-mono block mb-2">Statut</label>
               <select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })}
-                className="bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none" style={{ border: '1px solid var(--border-2)' }}>
+                className="bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none" style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 {STATUS_OPTIONS.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
               </select>
             </div>
-            <button onClick={handleSave} className="px-5 py-2 text-sm font-medium text-[var(--text-1)]" style={{ background: '#0047FF' }}>
+            <button onClick={handleSave} className="px-5 py-2 text-sm font-medium text-[var(--text-1)]" style={{ background: 'var(--accent)', borderRadius: '8px' }}>
               Enregistrer
             </button>
           </div>
@@ -341,7 +341,7 @@ function TabOverview({ project, onUpdate, onSwitchToAgents }) {
           <div className="label-mono mb-3">Progression</div>
           <div className="font-display text-4xl text-[var(--text-1)] mb-3">{pct}%</div>
           <div className="h-1 rounded-full" style={{ background: 'var(--bg-2)' }}>
-            <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: '#0047FF' }} />
+            <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: 'var(--accent)' }} />
           </div>
           <div className="label-mono mt-2">{doneTasks}/{totalTasks} tâches</div>
         </div>
@@ -390,7 +390,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
         </div>
         <button onClick={onSwitchToAgents}
           className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)]"
-          style={{ background: '#0047FF' }}>
+          style={{ background: 'var(--accent)', borderRadius: '8px' }}>
           <Sparkles size={14} />Analyser
         </button>
       </div>
@@ -440,7 +440,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
               { key: 'hosting',  icon: Cloud,    label: 'Hébergement'},
             ].filter(s => analysis.stack?.[s.key]?.name).map(({ key, icon: Icon, label }) => (
               <div key={key} className="flex items-center gap-2.5 border border-[var(--border-2)] px-3 py-2.5 bg-[var(--bg-1)]">
-                <Icon className="w-3.5 h-3.5 text-[#0047FF] shrink-0" />
+                <Icon className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
                 <span className="label-mono text-[var(--text-3)] text-xs w-20 shrink-0">{label}</span>
                 <span className="font-mono text-sm font-semibold text-[var(--text-1)]">{analysis.stack[key].name}</span>
                 {analysis.stack[key].justification && (
@@ -476,7 +476,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
               <tr className="border-t-2 border-[var(--border-3)]">
                 <td className="pt-2 text-sm font-semibold text-[var(--text-2)]">Total HT</td>
                 <td className="pt-2 text-right font-mono text-xs text-[var(--text-3)]">{totalDays}j</td>
-                <td className="pt-2 text-right font-mono text-base font-bold text-[#0047FF]">{fmt(analysis.budget?.totalHT)} €</td>
+                <td className="pt-2 text-right font-mono text-base font-bold text-[var(--accent)]">{fmt(analysis.budget?.totalHT)} €</td>
               </tr>
             </tfoot>
           </table>
@@ -509,7 +509,7 @@ function AiAnalysisSections({ project, onSwitchToAgents }) {
           <ul className="space-y-2 mt-2">
             {analysis.recommendations?.map((r, i) => (
               <li key={i} className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#0047FF] shrink-0 mt-0.5" />
+                <Check className="w-3.5 h-3.5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-sm text-[var(--text-1)]">{r}</span>
               </li>
             ))}
@@ -577,8 +577,8 @@ function TabTasks({ project, highlightTaskId }) {
         <input value={newPhase} onChange={e => setNewPhase(e.target.value)}
           placeholder="Nom de la nouvelle phase..."
           className="bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2 outline-none placeholder-neutral-700"
-          style={{ border: '1px solid var(--border-2)' }} />
-        <button type="submit" className="flex items-center gap-2 px-4 py-2 text-sm text-[var(--text-1)]" style={{ background: '#0047FF' }}>
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
+        <button type="submit" className="flex items-center gap-2 px-4 py-2 text-sm text-[var(--text-1)]" style={{ background: 'var(--accent)', borderRadius: '8px' }}>
           <Plus size={14} />Ajouter une phase
         </button>
       </form>
@@ -723,11 +723,11 @@ function TabAgents({ project, onReload }) {
               <button key={id} onClick={() => setActiveAgent(id)}
                 className={`w-full flex items-start gap-3 px-4 py-3.5 text-left transition-colors border-l-2 ${
                   activeAgent === id
-                    ? 'bg-[var(--hover-1)] border-[#0047FF] text-[var(--text-1)]'
+                    ? 'bg-[var(--hover-1)] border-[var(--accent)] text-[var(--text-1)]'
                     : 'border-transparent text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)]'
                 }`}>
                 <Icon size={15} strokeWidth={1.6} className="shrink-0 mt-0.5"
-                  style={{ color: activeAgent === id ? '#0047FF' : undefined }} />
+                  style={{ color: activeAgent === id ? 'var(--accent)' : undefined }} />
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-medium">{label}</div>
                   <div className="text-xs text-[var(--text-4)] mt-0.5">{desc}</div>
@@ -744,7 +744,7 @@ function TabAgents({ project, onReload }) {
         <div style={{ borderTop: '1px solid var(--border-1)', paddingTop: '24px' }}>
           {loading ? (
             <div className="flex items-center gap-3 text-sm text-[var(--text-3)]">
-              <Loader2 size={16} className="animate-spin" style={{ color: '#0047FF' }} />
+              <Loader2 size={16} className="animate-spin" style={{ color: 'var(--accent)' }} />
               Agent en cours d'exécution…
             </div>
           ) : activeAgent === 'intake' ? (
@@ -789,7 +789,7 @@ function TabAgents({ project, onReload }) {
                     <button onClick={sendToDrive} disabled={driveLoading}
                       className="flex items-center gap-1.5 label-mono hover:text-[var(--text-1)] transition-colors disabled:opacity-40">
                       {driveLoading
-                        ? <Loader2 size={11} className="animate-spin text-[#0047FF]" />
+                        ? <Loader2 size={11} className="animate-spin text-[var(--accent)]" />
                         : <HardDrive size={11} />}
                       {driveLoading ? 'Envoi…' : 'Drive'}
                     </button>
@@ -864,9 +864,9 @@ function TabAgents({ project, onReload }) {
                   <p className="text-sm font-semibold text-[var(--text-1)]">{s.title}</p>
 
                   {!project.phases?.length && (
-                    <div className="flex items-center justify-between gap-4 px-5 py-4 border border-[#0047FF]/30 bg-[#0047FF]/5 flex-wrap">
+                    <div className="flex items-center justify-between gap-4 px-5 py-4 border border-[var(--accent)]/30 bg-[var(--accent)]/5 flex-wrap">
                       <div className="flex items-center gap-3 min-w-0">
-                        <Sparkles size={15} className="text-[#0047FF] shrink-0" />
+                        <Sparkles size={15} className="text-[var(--accent)] shrink-0" />
                         <div className="min-w-0">
                           <p className="text-sm font-semibold text-[var(--text-1)]">Aucun planning sur ce projet</p>
                           <p className="text-xs text-[var(--text-2)] mt-0.5">
@@ -876,9 +876,9 @@ function TabAgents({ project, onReload }) {
                       </div>
                       <button onClick={() => runIntake(buildBriefFromSpec())}
                         className="shrink-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors"
-                        style={{ background: '#0047FF' }}
-                        onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-                        onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+                        style={{ background: 'var(--accent)', borderRadius: '8px' }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
                         <Sparkles size={13} />
                         Générer le planning
                       </button>
@@ -996,9 +996,9 @@ function TabAgents({ project, onReload }) {
                   </div>
                   <a href={`mailto:${project.client?.email || ''}?subject=${encodeURIComponent(result.data.subject || '')}&body=${encodeURIComponent(result.data.body || '')}`}
                     className="shrink-0 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors"
-                    style={{ background: '#0047FF' }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-                    onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+                    style={{ background: 'var(--accent)', borderRadius: '8px' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
                     <Mail size={13} />
                     Ouvrir dans la messagerie
                   </a>
@@ -1012,7 +1012,7 @@ function TabAgents({ project, onReload }) {
                     <div className="label-mono mb-2">Conseils</div>
                     {result.data.tips.map((tip, i) => (
                       <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-3)]">
-                        <span style={{ color: '#0047FF' }}>→</span>{tip}
+                        <span style={{ color: 'var(--accent)' }}>→</span>{tip}
                       </div>
                     ))}
                   </div>
@@ -1061,7 +1061,7 @@ function FileTree({ node, depth }) {
         onClick={() => isFolder && setOpen(o => !o)}
         title={node.description}>
         {isFolder
-          ? <span style={{ color: '#0047FF' }}>{open ? '▾' : '▸'}</span>
+          ? <span style={{ color: 'var(--accent)' }}>{open ? '▾' : '▸'}</span>
           : <span className="w-3 inline-block" />}
         <span className={isFolder ? 'text-[var(--text-1)] font-medium' : 'text-[var(--text-3)]'}>
           {node.name}{isFolder ? '/' : ''}
@@ -1082,12 +1082,12 @@ function IntakeQuick({ project, onRun }) {
         <label className="label-mono block mb-2">Brief / cahier des charges du client</label>
         <textarea value={brief} onChange={e => setBrief(e.target.value)} rows={7}
           className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none resize-none placeholder-neutral-700"
-          style={{ border: '1px solid var(--border-2)' }}
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
           placeholder={`Décris le projet de ${project.client?.name || 'ton client'} en détail : objectifs, fonctionnalités, contraintes techniques…`} />
       </div>
       <button onClick={() => onRun(brief)} disabled={brief.trim().length < 30}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[var(--text-1)] disabled:opacity-40 disabled:cursor-not-allowed"
-        style={{ background: '#0047FF' }}>
+        style={{ background: 'var(--accent)', borderRadius: '8px' }}>
         <Sparkles size={14} />Analyser le projet
       </button>
     </div>
@@ -1102,7 +1102,7 @@ function SpecQuick({ project, onRun }) {
         <label className="label-mono block mb-2">Brief du projet</label>
         <textarea value={brief} onChange={e => setBrief(e.target.value)} rows={7}
           className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none resize-none placeholder-neutral-700"
-          style={{ border: '1px solid var(--border-2)' }}
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
           placeholder={`Décris le contexte, les objectifs et les attentes de ${project.client?.name || 'ton client'} : l'IA structure tout en cahier des charges complet (contexte, fonctionnalités, technique, budget, planning de consultation…)`} />
       </div>
       <p className="text-xs text-[var(--text-4)] leading-relaxed">
@@ -1111,7 +1111,7 @@ function SpecQuick({ project, onRun }) {
       </p>
       <button onClick={() => onRun(brief)} disabled={brief.trim().length < 30}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[var(--text-1)] disabled:opacity-40 disabled:cursor-not-allowed"
-        style={{ background: '#0047FF' }}>
+        style={{ background: 'var(--accent)', borderRadius: '8px' }}>
         <FileText size={14} />Générer le cahier des charges
       </button>
     </div>
@@ -1134,7 +1134,7 @@ function EmailQuick({ project, onRun }) {
       <div>
         <label className="label-mono block mb-2">Type d'email</label>
         <select value={type} onChange={e => setType(e.target.value)}
-          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2.5 outline-none" style={{ border: '1px solid var(--border-2)' }}>
+          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2.5 outline-none" style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
           {EMAIL_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
         </select>
       </div>
@@ -1142,11 +1142,11 @@ function EmailQuick({ project, onRun }) {
         <label className="label-mono block mb-2">Contexte</label>
         <textarea value={context} onChange={e => setContext(e.target.value)} rows={4}
           className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none resize-none"
-          style={{ border: '1px solid var(--border-2)' }} placeholder="Détails à inclure dans l'email..." />
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} placeholder="Détails à inclure dans l'email..." />
       </div>
       <button onClick={() => onRun(type, { details: context, project: project.name, client: project.client?.name })}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[var(--text-1)] transition-opacity hover:opacity-90"
-        style={{ background: '#0047FF' }}>
+        style={{ background: 'var(--accent)', borderRadius: '8px' }}>
         <Zap size={14} />Rédiger l'email
       </button>
     </div>
@@ -1161,7 +1161,7 @@ function StructureQuick({ project, onRun }) {
         <label className="label-mono block mb-2">Stack technique</label>
         <input value={stack} onChange={e => setStack(e.target.value)}
           className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2.5 outline-none"
-          style={{ border: '1px solid var(--border-2)' }} placeholder="Ex : React + Node.js + PostgreSQL" />
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} placeholder="Ex : React + Node.js + PostgreSQL" />
       </div>
       <div className="px-3 py-2.5 text-xs text-[var(--text-3)]" style={{ border: '1px solid var(--border-1)', background: 'var(--bg-0)' }}>
         <div className="label-mono mb-1">Projet détecté</div>
@@ -1169,7 +1169,7 @@ function StructureQuick({ project, onRun }) {
       </div>
       <button onClick={() => onRun(stack)}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[var(--text-1)] transition-opacity hover:opacity-90"
-        style={{ background: '#0047FF' }}>
+        style={{ background: 'var(--accent)', borderRadius: '8px' }}>
         <Layers size={14} />Générer la structure
       </button>
     </div>
@@ -1291,7 +1291,7 @@ export default function ProjectDetail() {
               <ExternalLink size={10} />
             </button>
           )}
-          <span className="label-mono px-3 py-1.5" style={{ border: '1px solid var(--border-2)' }}>
+          <span className="label-mono px-3 py-1.5" style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
             {statusCfg.label}
           </span>
         </div>
@@ -1303,10 +1303,10 @@ export default function ProjectDetail() {
           <button key={tabId} onClick={() => setTab(tabId)}
             className={`flex items-center gap-2 px-6 py-3.5 text-sm transition-colors border-b-2 ${
               tab === tabId
-                ? 'border-[#0047FF] text-[var(--text-1)]'
+                ? 'border-[var(--accent)] text-[var(--text-1)]'
                 : 'border-transparent text-[var(--text-3)] hover:text-[var(--text-1)]'
             }`}>
-            <Icon size={14} strokeWidth={1.6} style={{ color: tab === tabId ? '#0047FF' : undefined }} />
+            <Icon size={14} strokeWidth={1.6} style={{ color: tab === tabId ? 'var(--accent)' : undefined }} />
             {label}
           </button>
         ))}

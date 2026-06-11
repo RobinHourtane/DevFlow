@@ -17,8 +17,8 @@ import { PROJECT_STATUS_LABEL as STATUS_LABEL, TASK_PRIORITY_LABEL as PRIORITY_L
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const TYPE_ICON = {
-  project_start:    { icon: FolderOpen, label: 'Début projet',    bg: 'bg-[#0047FF]/20', text: 'text-[#0047FF]',  dot: 'bg-[#0047FF]' },
-  project_deadline: { icon: FolderOpen, label: 'Deadline projet', bg: 'bg-[#0047FF]/20', text: 'text-[#0047FF]',  dot: 'bg-[#0047FF]' },
+  project_start:    { icon: FolderOpen, label: 'Début projet',    bg: 'bg-[var(--accent)]/20', text: 'text-[var(--accent)]',  dot: 'bg-[var(--accent)]' },
+  project_deadline: { icon: FolderOpen, label: 'Deadline projet', bg: 'bg-[var(--accent)]/20', text: 'text-[var(--accent)]',  dot: 'bg-[var(--accent)]' },
   task:             { icon: CheckSquare, label: 'Tâche',          bg: 'bg-amber-500/20',  text: 'text-amber-400',  dot: 'bg-amber-400' },
   phase:            { icon: Layers,      label: 'Fin de phase',   bg: 'bg-purple-500/20', text: 'text-purple-400', dot: 'bg-purple-400' },
 };
@@ -67,13 +67,13 @@ function DayCell({ date, events, isCurrentMonth, onDayClick, onEventClick, selec
       onClick={() => onDayClick(date)}
       className={`min-h-[90px] p-1.5 border-b border-r border-[var(--border-1)] cursor-pointer transition-colors
         ${!isCurrentMonth ? 'opacity-30' : ''}
-        ${isSelected ? 'bg-[#0047FF]/10' : 'hover:bg-[var(--hover-1)]'}
+        ${isSelected ? 'bg-[var(--accent)]/10' : 'hover:bg-[var(--hover-1)]'}
       `}
     >
       {/* Numéro du jour */}
       <div className="flex items-center justify-between mb-1">
         <span className={`w-6 h-6 flex items-center justify-center text-xs font-mono
-          ${today ? 'bg-[#0047FF] text-[var(--text-1)] font-bold' : isSelected ? 'text-[var(--text-1)]' : 'text-[var(--text-2)]'}
+          ${today ? 'bg-[var(--accent)] text-[var(--text-1)] font-bold' : isSelected ? 'text-[var(--text-1)]' : 'text-[var(--text-2)]'}
           ${today ? '' : ''}`}
         >
           {format(date, 'd')}
@@ -185,7 +185,7 @@ function EventDetail({ event, onClose }) {
       {event.projectId && (
         <button
           onClick={() => navigate(`/projects/${event.projectId}`)}
-          className="w-full text-xs label-mono text-[#0047FF] border border-[#0047FF]/30 py-2 hover:bg-[#0047FF]/10 transition-colors"
+          className="w-full text-xs label-mono text-[var(--accent)] border border-[var(--accent)]/30 py-2 hover:bg-[var(--accent)]/10 transition-colors"
         >
           Voir le projet →
         </button>
@@ -268,7 +268,7 @@ export default function Calendar() {
                 onClick={() => setFilter(f.id)}
                 className={`px-3 py-1.5 text-xs label-mono transition-colors border
                   ${filter === f.id
-                    ? 'bg-[#0047FF] border-[#0047FF] text-[var(--text-1)]'
+                    ? 'bg-[var(--accent)] border-[var(--accent)] text-[var(--text-1)]'
                     : 'border-[var(--border-3)] text-[var(--text-2)] hover:border-[var(--border-3)]'}`}
               >
                 {f.label}
@@ -281,7 +281,7 @@ export default function Calendar() {
       {/* KPI bar */}
       <div className="flex items-center gap-6 px-1">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-[#0047FF]" />
+          <span className="w-2 h-2 bg-[var(--accent)]" />
           <span className="label-mono text-[var(--text-2)]">{totalEvents} événements</span>
         </div>
         {overdueCount > 0 && (
@@ -292,7 +292,7 @@ export default function Calendar() {
         )}
         <div className="flex items-center gap-4 ml-auto">
           {[
-            { dot: 'bg-[#0047FF]', label: 'Projets' },
+            { dot: 'bg-[var(--accent)]', label: 'Projets' },
             { dot: 'bg-amber-400', label: 'Tâches' },
             { dot: 'bg-purple-500', label: 'Phases' },
             { dot: 'bg-red-500',   label: 'Retard' },
@@ -341,7 +341,7 @@ export default function Calendar() {
           {/* Grille */}
           {loading ? (
             <div className="h-64 flex items-center justify-center">
-              <div className="w-6 h-6 border-2 border-[#0047FF] border-t-transparent animate-spin" />
+              <div className="w-6 h-6 border-2 border-[var(--accent)] border-t-transparent animate-spin" />
             </div>
           ) : (
             <div className="grid grid-cols-7">
@@ -467,7 +467,7 @@ export default function Calendar() {
             <p className="label-mono text-[var(--text-3)] mb-3">Légende</p>
             <div className="space-y-2">
               {[
-                { dot: 'bg-[#0047FF]', label: 'Début / deadline projet' },
+                { dot: 'bg-[var(--accent)]', label: 'Début / deadline projet' },
                 { dot: 'bg-amber-400', label: 'Tâche due' },
                 { dot: 'bg-purple-500', label: 'Fin de phase' },
                 { dot: 'bg-red-500',   label: 'En retard' },

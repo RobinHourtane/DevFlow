@@ -60,9 +60,9 @@ export default function Dashboard() {
         actions={
           <button onClick={() => navigate('/agents')}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors blue-glow"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
             <Sparkles size={14} />
             Lancer un agent
           </button>
@@ -70,13 +70,12 @@ export default function Dashboard() {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4" style={{ borderBottom: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 px-10 pt-8">
         {kpis.map((k, i) => (
           <motion.div key={k.label}
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
-            className="px-10 py-8"
-            style={{ borderRight: i < kpis.length - 1 ? '1px solid var(--border-1)' : 'none' }}>
+            className="card px-6 py-5">
             <div className="label-mono mb-3">{k.label}</div>
             <div className="font-display text-4xl text-[var(--text-1)]">{k.value}</div>
             <div className="text-xs text-[var(--text-4)] mt-2 font-mono">{k.hint}</div>
@@ -85,10 +84,10 @@ export default function Dashboard() {
       </div>
 
       {/* Graphique + Projets */}
-      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ borderBottom: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-10 py-6">
 
         {/* Area chart */}
-        <section className="p-10" style={{ borderRight: '1px solid var(--border-1)' }}>
+        <section className="card p-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display text-xl text-[var(--text-1)]">Chiffre d'affaires</h2>
             <span className="label-mono">6 derniers mois</span>
@@ -97,8 +96,8 @@ export default function Dashboard() {
             <AreaChart data={revenueData}>
               <defs>
                 <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#0047FF" stopOpacity={0.15} />
-                  <stop offset="95%" stopColor="#0047FF" stopOpacity={0}    />
+                  <stop offset="5%"  stopColor="var(--accent)" stopOpacity={0.15} />
+                  <stop offset="95%" stopColor="var(--accent)" stopOpacity={0}    />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-1)" />
@@ -107,14 +106,14 @@ export default function Dashboard() {
               <YAxis tick={{ fill: 'var(--text-4)', fontSize: 11, fontFamily: 'JetBrains Mono' }}
                 axisLine={false} tickLine={false} tickFormatter={v => `${v / 1000}k`} />
               <Tooltip content={<CustomTooltip />} />
-              <Area type="monotone" dataKey="ca" stroke="#0047FF" strokeWidth={1.5}
-                fill="url(#grad)" dot={false} activeDot={{ r: 3, fill: '#0047FF' }} />
+              <Area type="monotone" dataKey="ca" stroke="var(--accent)" strokeWidth={1.5}
+                fill="url(#grad)" dot={false} activeDot={{ r: 3, fill: 'var(--accent)' }} />
             </AreaChart>
           </ResponsiveContainer>
         </section>
 
         {/* Projets récents */}
-        <section className="p-10">
+        <section className="card p-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display text-xl text-[var(--text-1)]">Projets récents</h2>
             <Link to="/projects" className="label-mono hover:text-[var(--text-1)] transition-colors">
@@ -124,11 +123,11 @@ export default function Dashboard() {
 
           {recentProjects.length === 0 ? (
             <div className="text-sm text-[var(--text-3)] p-6"
-              style={{ border: '1px dashed var(--border-2)' }}>
-              Aucun projet. <Link to="/projects" state={{ prefill: {} }} className="text-[#0047FF] hover:underline">Créez-en un →</Link>
+              style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>
+              Aucun projet. <Link to="/projects" state={{ prefill: {} }} className="text-[var(--accent)] hover:underline">Créez-en un →</Link>
             </div>
           ) : (
-            <ul style={{ border: '1px solid var(--border-1)' }}>
+            <ul style={{ background: 'var(--card)', border: '1px solid var(--border-1)', borderRadius: '12px', overflow: 'hidden' }}>
               {recentProjects.map((p, i) => (
                 <li key={p.id}
                   className="px-5 py-3.5 flex items-center justify-between hover:bg-[var(--hover-1)] cursor-pointer transition-colors"

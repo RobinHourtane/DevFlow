@@ -12,7 +12,7 @@ import { PROJECT_STATUS_LABEL as STATUS_LABEL, PROJECT_TYPE_LABEL as TYPE_LABEL 
 
 const STATUS_COLOR = {
   PROSPECT: 'var(--text-4)', NEGOTIATION: '#d97706', SIGNED: '#16a34a',
-  IN_PROGRESS: '#0047FF', REVIEW: '#7c3aed', DELIVERED: '#16a34a', ARCHIVED: 'var(--text-4)',
+  IN_PROGRESS: 'var(--accent)', REVIEW: '#7c3aed', DELIVERED: '#16a34a', ARCHIVED: 'var(--text-4)',
 };
 
 // ─── Champ éditable ──────────────────────────────────────────────────────────
@@ -29,16 +29,16 @@ function EditableField({ label, value, onChange, editing, textarea, type = 'text
             value={value || ''}
             onChange={e => onChange(e.target.value)}
             rows={4}
-            className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors resize-none"
-            style={{ border: '1px solid var(--border-2)' }}
+            className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors resize-none"
+            style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
           />
         ) : (
           <input
             type={type}
             value={value || ''}
             onChange={e => onChange(e.target.value)}
-            className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[#0047FF] transition-colors"
-            style={{ border: '1px solid var(--border-2)' }}
+            className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-3 py-2 outline-none focus:border-[var(--accent)] transition-colors"
+            style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
           />
         )
       ) : (
@@ -90,8 +90,8 @@ function ProjectRow({ project, onClick }) {
         {/* Statut */}
         <span className="label-mono px-2.5 py-1 text-xs"
           style={{
-            background: `${STATUS_COLOR[project.status]}15`,
-            border: `1px solid ${STATUS_COLOR[project.status]}40`,
+            background: `color-mix(in srgb, ${STATUS_COLOR[project.status]} 8%, transparent)`,
+            border: `1px solid color-mix(in srgb, ${STATUS_COLOR[project.status]} 25%, transparent)`,
             color: STATUS_COLOR[project.status],
           }}>
           {STATUS_LABEL[project.status]}
@@ -206,8 +206,8 @@ export default function ClientDetail() {
           {/* Avatar */}
           <div className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
             style={{
-              background: '#0047FF18',
-              border: '1px solid #0047FF40',
+              background: 'color-mix(in srgb, var(--accent) 9%, transparent)',
+              border: '1px solid color-mix(in srgb, var(--accent) 25%, transparent)',
               color: '#4d7fff',
               fontFamily: 'var(--font-display)',
             }}>
@@ -221,7 +221,7 @@ export default function ClientDetail() {
               <input
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
-                className="font-display text-2xl text-[var(--text-1)] bg-transparent border-b border-[#0047FF] outline-none pb-0.5"
+                className="font-display text-2xl text-[var(--text-1)] bg-transparent border-b border-[var(--accent)] outline-none pb-0.5"
               />
             ) : (
               <h1 className="font-display text-2xl text-[var(--text-1)]">{client.name}</h1>
@@ -250,14 +250,14 @@ export default function ClientDetail() {
             <>
               <button onClick={handleCancel}
                 className="flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <X size={13} /> Annuler
               </button>
               <button onClick={handleSave} disabled={saving}
                 className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-50"
-                style={{ background: '#0047FF' }}
-                onMouseEnter={e => !saving && (e.currentTarget.style.background = '#0036CC')}
-                onMouseLeave={e => !saving && (e.currentTarget.style.background = '#0047FF')}>
+                style={{ background: 'var(--accent)', borderRadius: '8px' }}
+                onMouseEnter={e => !saving && (e.currentTarget.style.background = 'var(--accent-hover)')}
+                onMouseLeave={e => !saving && (e.currentTarget.style.background = 'var(--accent)')}>
                 <Check size={13} /> {saving ? 'Enregistrement…' : 'Enregistrer'}
               </button>
             </>
@@ -265,12 +265,12 @@ export default function ClientDetail() {
             <>
               <button onClick={() => setEditing(true)}
                 className="flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <Edit2 size={13} /> Modifier
               </button>
               <button onClick={handleDelete}
                 className="flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--text-4)] hover:text-red-400 transition-colors"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <Trash2 size={13} />
               </button>
             </>
@@ -279,15 +279,14 @@ export default function ClientDetail() {
       </div>
 
       {/* ── KPIs ── */}
-      <div className="grid grid-cols-4" style={{ borderBottom: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-4 gap-4 px-8 py-5">
         {[
           { label: 'Projets total',    value: client.projects.length },
           { label: 'Budget cumulé',    value: totalBudget > 0 ? `${totalBudget.toLocaleString('fr-FR')} €` : '—' },
           { label: 'Projets actifs',   value: activeProjects },
           { label: 'Tâches associées', value: totalTasks },
-        ].map((k, i) => (
-          <div key={k.label} className="px-8 py-6"
-            style={{ borderRight: i < 3 ? '1px solid var(--border-1)' : 'none' }}>
+        ].map((k) => (
+          <div key={k.label} className="card px-6 py-4">
             <div className="label-mono mb-2">{k.label}</div>
             <div className="font-display text-3xl text-[var(--text-1)]">{k.value}</div>
           </div>
@@ -351,7 +350,7 @@ export default function ClientDetail() {
           {client.projects.length === 0 ? (
             <div className="px-8 pb-8">
               <div className="p-6 text-center label-mono"
-                style={{ border: '1px dashed var(--border-2)' }}>
+                style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>
                 Aucun projet associé
               </div>
             </div>
@@ -387,7 +386,7 @@ export default function ClientDetail() {
           <div className="px-8 pb-6" style={{ borderBottom: '1px solid var(--border-1)' }}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <FileText size={14} style={{ color: '#0047FF' }} />
+                <FileText size={14} style={{ color: 'var(--accent)' }} />
                 <span className="label-mono text-[var(--text-1)]">Contrats ({allContracts.length})</span>
               </div>
               <button
@@ -396,7 +395,7 @@ export default function ClientDetail() {
                 Voir tous <ExternalLink size={10} />
               </button>
             </div>
-            <div style={{ border: '1px solid var(--border-1)' }}>
+            <div style={{ background: 'var(--card)', border: '1px solid var(--border-1)', borderRadius: '12px', overflow: 'hidden' }}>
               {allContracts.map((c, i) => {
                 const cfg = CONTRACT_STATUS[c.status] || CONTRACT_STATUS.DRAFT;
                 return (
@@ -416,7 +415,7 @@ export default function ClientDetail() {
                         {format(parseISO(c.createdAt), 'dd/MM/yyyy')}
                       </span>
                       <span className="label-mono px-2.5 py-1 text-xs"
-                        style={{ background: `${cfg.color}15`, border: `1px solid ${cfg.color}30`, color: cfg.color }}>
+                        style={{ background: `color-mix(in srgb, ${cfg.color} 8%, transparent)`, border: `1px solid color-mix(in srgb, ${cfg.color} 19%, transparent)`, color: cfg.color }}>
                         {cfg.label}
                       </span>
                       <ChevronRight size={13} className="text-[var(--text-5)] group-hover:text-[var(--text-2)] transition-colors" />
@@ -433,7 +432,7 @@ export default function ClientDetail() {
       <div className="p-8">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Sparkles size={14} style={{ color: '#0047FF' }} />
+            <Sparkles size={14} style={{ color: 'var(--accent)' }} />
             <span className="label-mono text-[var(--text-1)]">Résumé IA</span>
             <span className="label-mono" style={{ fontSize: '10px' }}>Groq · llama-3.3-70b</span>
           </div>
@@ -450,7 +449,7 @@ export default function ClientDetail() {
         <div className="p-5" style={{ border: '1px solid #1a1a2e', background: '#05051a' }}>
           {summaryLoading ? (
             <div className="flex items-center gap-3">
-              <div className="w-4 h-4 rounded-full border-2 border-[#0047FF] border-t-transparent animate-spin shrink-0" />
+              <div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin shrink-0" />
               <span className="label-mono">Analyse en cours…</span>
             </div>
           ) : summary ? (

@@ -26,7 +26,7 @@ export default function Login() {
         <div className="mb-10">
           <div className="label-mono mb-2">Auth / Connexion</div>
           <div className="font-display text-3xl text-[var(--text-1)]">
-            DevFlow<span style={{ color: '#0047FF' }}>.</span>
+            DevFlow<span style={{ color: 'var(--accent)' }}>.</span>
           </div>
           <p className="text-sm text-[var(--text-3)] mt-2">Accédez à votre espace de gestion.</p>
         </div>
@@ -47,16 +47,16 @@ export default function Login() {
               <label className="label-mono block mb-2">{label}</label>
               <input type={type} value={value} onChange={e => set(e.target.value)}
                 placeholder={placeholder} required
-                className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-3 outline-none focus:border-[#0047FF] transition-colors placeholder-neutral-700"
-                style={{ border: '1px solid var(--border-2)' }} />
+                className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-3 outline-none focus:border-[var(--accent)] transition-colors placeholder-neutral-700"
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
             </div>
           ))}
 
           <button type="submit" disabled={isLoading}
             className="w-full flex items-center justify-center gap-2 py-3 text-sm font-medium text-[var(--text-1)] transition-colors mt-2 disabled:opacity-50"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => !isLoading && (e.currentTarget.style.background = '#0036CC')}
-            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => !isLoading && (e.currentTarget.style.background = 'var(--accent-hover)')}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
             {isLoading
               ? <div className="w-4 h-4 border border-[var(--border-2)] border-t-white rounded-full animate-spin" />
               : <><span>Se connecter</span><ArrowRight size={14} /></>}
@@ -65,7 +65,7 @@ export default function Login() {
 
         <p className="text-sm text-[var(--text-4)] mt-8">
           Pas de compte ?{' '}
-          <Link to="/register" className="text-[#0047FF] hover:underline">S'inscrire</Link>
+          <Link to="/register" className="text-[var(--accent)] hover:underline">S'inscrire</Link>
         </p>
       </motion.div>
     </div>

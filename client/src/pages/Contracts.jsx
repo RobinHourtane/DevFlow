@@ -38,7 +38,7 @@ function SimpleMarkdown({ content }) {
         if (line.startsWith('- ') || line.startsWith('* '))
           return (
             <div key={i} className="flex gap-2 text-sm text-[var(--text-1)] leading-relaxed pl-2">
-              <span className="text-[#0047FF] shrink-0 mt-0.5">–</span>
+              <span className="text-[var(--accent)] shrink-0 mt-0.5">–</span>
               <span>{renderInline(line.slice(2))}</span>
             </div>
           );
@@ -206,14 +206,14 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
   if (isGenerating) {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-6 px-8">
-        <div className="w-10 h-10 border-2 border-[#0047FF] border-t-transparent animate-spin" />
+        <div className="w-10 h-10 border-2 border-[var(--accent)] border-t-transparent animate-spin" />
         <div className="text-center space-y-2">
           <p className="font-display text-lg text-[var(--text-1)] font-semibold">Rédaction du contrat…</p>
           <p className="text-[var(--text-3)] text-sm">L'IA génère un contrat juridiquement cohérent.<br />Cela prend 10 à 20 secondes.</p>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2.5 border border-[#0047FF]/30 bg-[#0047FF]/8">
-          <Sparkles size={13} className="text-[#0047FF]" />
-          <span className="label-mono text-[#0047FF]">{pDetails.name}</span>
+        <div className="flex items-center gap-2 px-4 py-2.5 border border-[var(--accent)]/30 bg-[var(--accent)]/8">
+          <Sparkles size={13} className="text-[var(--accent)]" />
+          <span className="label-mono text-[var(--accent)]">{pDetails.name}</span>
         </div>
       </div>
     );
@@ -226,8 +226,8 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
       <div className="px-6 py-4 flex items-center justify-between shrink-0"
         style={{ borderBottom: '1px solid var(--border-1)' }}>
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[#0047FF]/10 border border-[#0047FF]/20">
-            <FileText size={14} className="text-[#0047FF]" />
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+            <FileText size={14} className="text-[var(--accent)]" />
           </div>
           <div>
             <p className="text-[var(--text-1)] font-semibold text-sm">Nouveau contrat</p>
@@ -247,7 +247,7 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
           {/* ── Sélection client & projet ── */}
           <div>
             <p className="label-mono text-[var(--text-1)] mb-4 flex items-center gap-2">
-              <Building2 size={12} className="text-[#0047FF]" />
+              <Building2 size={12} className="text-[var(--accent)]" />
               Client &amp; projet
               <span className="ml-2 text-[var(--text-4)]" style={{ fontSize: '10px' }}>
                 Sélectionnez pour auto-remplir les champs
@@ -309,7 +309,7 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
           {/* ── Prestataire ── */}
           <div>
             <p className="label-mono text-[var(--text-1)] mb-4 flex items-center gap-2">
-              <User size={12} className="text-[#0047FF]" />
+              <User size={12} className="text-[var(--accent)]" />
               Vos informations
               <span className="ml-2 text-[var(--text-4)]" style={{ fontSize: '10px' }}>Sauvegardé automatiquement</span>
             </p>
@@ -336,7 +336,7 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
           {/* ── Informations client ── */}
           <div>
             <p className="label-mono text-[var(--text-1)] mb-4 flex items-center gap-2">
-              <Building2 size={12} className="text-[#0047FF]" />
+              <Building2 size={12} className="text-[var(--accent)]" />
               Informations client
               {clientId && <span className="text-emerald-500" style={{ fontSize: '10px' }}>✓ Auto-rempli</span>}
             </p>
@@ -372,7 +372,7 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
           {/* ── Détails du projet ── */}
           <div>
             <p className="label-mono text-[var(--text-1)] mb-4 flex items-center gap-2">
-              <FileText size={12} className="text-[#0047FF]" />
+              <FileText size={12} className="text-[var(--accent)]" />
               Détails de la mission
               {projectId && <span className="text-emerald-500" style={{ fontSize: '10px' }}>✓ Auto-rempli depuis le projet</span>}
             </p>
@@ -443,15 +443,15 @@ function GeneratePanel({ clients, projects, onGenerated, onCancel }) {
         style={{ borderTop: '1px solid var(--border-1)' }}>
         <button type="button" onClick={onCancel}
           className="px-4 py-2.5 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-          style={{ border: '1px solid var(--border-2)' }}>
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
           Annuler
         </button>
         <button
           onClick={handleSubmit}
           className="flex items-center gap-2.5 px-6 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors"
-          style={{ background: '#0047FF' }}
-          onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-          onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+          style={{ background: 'var(--accent)', borderRadius: '8px' }}
+          onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
           <Sparkles size={14} />
           Générer le contrat IA
         </button>
@@ -558,9 +558,9 @@ function ContractDetail({ contract, onStatusChange, onDelete }) {
             disabled={downloading || contract._unsaved}
             title={contract._unsaved ? 'Associez un projet pour activer le PDF' : 'Télécharger en PDF'}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = '#0036CC')}
-            onMouseLeave={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = '#0047FF')}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = 'var(--accent-hover)')}
+            onMouseLeave={e => !downloading && !contract._unsaved && (e.currentTarget.style.background = 'var(--accent)')}>
             {downloading
               ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Génération…</>
               : <><Download size={13} /> Télécharger PDF</>}
@@ -572,7 +572,7 @@ function ContractDetail({ contract, onStatusChange, onDelete }) {
               onClick={() => handleStatus(nextStatus)}
               disabled={updating}
               className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors disabled:opacity-50"
-              style={{ border: `1px solid ${nextCfg.color}60`, color: nextCfg.color, background: `${nextCfg.color}10` }}
+              style={{ border: `1px solid color-mix(in srgb, ${nextCfg.color} 38%, transparent)`, color: nextCfg.color, background: `color-mix(in srgb, ${nextCfg.color} 6%, transparent)` }}
               onMouseEnter={e => !updating && (e.currentTarget.style.opacity = '0.8')}
               onMouseLeave={e => !updating && (e.currentTarget.style.opacity = '1')}>
               <ChevronRight size={12} />
@@ -582,7 +582,7 @@ function ContractDetail({ contract, onStatusChange, onDelete }) {
           {contract.status !== 'DRAFT' && !contract._unsaved && (
             <button onClick={() => handleStatus('DRAFT')} disabled={updating}
               className="px-3 py-2 text-xs text-[var(--text-3)] hover:text-[var(--text-1)] transition-colors disabled:opacity-50"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               Brouillon
             </button>
           )}
@@ -590,13 +590,13 @@ function ContractDetail({ contract, onStatusChange, onDelete }) {
           <div className="ml-auto flex items-center gap-2">
             <button onClick={handleCopy}
               className="flex items-center gap-1.5 px-3 py-2 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               {copied ? <><Check size={12} className="text-emerald-400" /> Copié</> : <><Copy size={12} /> Copier</>}
             </button>
             {!contract._unsaved && (
               <button onClick={() => onDelete(contract.id)}
                 className="p-2 text-[var(--text-4)] hover:text-red-400 transition-colors"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <Trash2 size={14} />
               </button>
             )}
@@ -701,7 +701,7 @@ export default function Contracts() {
           <button
             onClick={() => { setMode(mode === 'generate' ? 'list' : 'generate'); setTempContract(null); }}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors"
-            style={{ background: mode === 'generate' ? 'var(--border-2)' : '#0047FF' }}
+            style={{ background: mode === 'generate' ? 'var(--border-2)' : 'var(--accent)' }}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
             {mode === 'generate' ? <><X size={14} /> Annuler</> : <><PenLine size={14} /> Nouveau contrat</>}
@@ -710,10 +710,9 @@ export default function Contracts() {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-4 shrink-0" style={{ borderBottom: '1px solid var(--border-1)' }}>
-        {kpis.map((k, i) => (
-          <div key={k.label} className="px-8 py-6"
-            style={{ borderRight: i < 3 ? '1px solid var(--border-1)' : 'none' }}>
+      <div className="grid grid-cols-4 gap-4 shrink-0 px-8 py-5">
+        {kpis.map((k) => (
+          <div key={k.label} className="card px-6 py-4">
             <div className="label-mono mb-2">{k.label}</div>
             <div className="font-display text-3xl text-[var(--text-1)]">{k.value}</div>
           </div>
@@ -734,13 +733,13 @@ export default function Contracts() {
               <input value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="Rechercher…"
                 className="w-full pl-9 pr-3 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none"
-                style={{ border: '1px solid var(--border-2)' }} />
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
             </div>
             <div className="flex gap-1 flex-wrap">
               {[['ALL', 'Tous'], ...Object.entries(STATUS_CFG).map(([k, v]) => [k, v.label])].map(([k, label]) => (
                 <button key={k} onClick={() => setFilter(k)}
                   className={`px-2.5 py-1 text-xs transition-colors ${filter === k ? 'text-[var(--text-1)] bg-[var(--bg-3)]' : 'text-[var(--text-3)] hover:text-[var(--text-1)]'}`}
-                  style={{ border: '1px solid var(--border-2)' }}>
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                   {label}
                 </button>
               ))}
@@ -766,7 +765,7 @@ export default function Contracts() {
                     style={{
                       borderBottom: '1px solid var(--bg-2)',
                       background: isActive ? 'var(--bg-1)' : undefined,
-                      borderLeft: isActive ? '2px solid #0047FF' : '2px solid transparent',
+                      borderLeft: isActive ? '2px solid var(--accent)' : '2px solid transparent',
                     }}>
                     <div className="flex items-start justify-between gap-2 mb-1.5">
                       <p className="text-sm text-[var(--text-1)] font-medium truncate leading-snug">{c.title}</p>
@@ -833,9 +832,9 @@ export default function Contracts() {
                 {contracts.length === 0 && (
                   <button onClick={() => setMode('generate')}
                     className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[var(--text-1)] mt-1"
-                    style={{ background: '#0047FF' }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-                    onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+                    style={{ background: 'var(--accent)', borderRadius: '8px' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
                     <PenLine size={13} />
                     Nouveau contrat
                   </button>

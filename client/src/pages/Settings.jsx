@@ -17,8 +17,8 @@ function Section({ icon: Icon, title, description, children }) {
   return (
     <section className="p-10" style={{ borderBottom: '1px solid var(--border-1)' }}>
       <div className="flex items-start gap-4 mb-6 max-w-2xl">
-        <div className="p-2 shrink-0" style={{ background: '#0047FF15', border: '1px solid #0047FF30' }}>
-          <Icon size={16} style={{ color: '#0047FF' }} />
+        <div className="p-2 shrink-0" style={{ background: 'color-mix(in srgb, var(--accent) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 19%, transparent)' }}>
+          <Icon size={16} style={{ color: 'var(--accent)' }} />
         </div>
         <div>
           <h2 className="font-display text-xl text-[var(--text-1)]">{title}</h2>
@@ -144,9 +144,9 @@ export default function Settings() {
           </div>
           <button type="submit" disabled={profileSaving}
             className="mt-6 px-5 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-50"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
             {profileSaving ? 'Enregistrement…' : 'Enregistrer'}
           </button>
         </form>
@@ -175,9 +175,9 @@ export default function Settings() {
           </div>
           <button type="submit" disabled={pwSaving}
             className="mt-6 px-5 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-50"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
             {pwSaving ? 'Enregistrement…' : 'Changer le mot de passe'}
           </button>
         </form>

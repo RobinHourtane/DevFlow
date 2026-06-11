@@ -21,8 +21,8 @@ function CreateModal({ onClose, onCreate }) {
           onChange={e => setForm({ ...form, [key]: e.target.value })}
           rows={3}
           placeholder={opts.placeholder || ''}
-          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[#0047FF] transition-colors resize-none"
-          style={{ border: '1px solid var(--border-2)' }}
+          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[var(--accent)] transition-colors resize-none"
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
         />
       ) : (
         <input
@@ -31,8 +31,8 @@ function CreateModal({ onClose, onCreate }) {
           value={form[key]}
           onChange={e => setForm({ ...form, [key]: e.target.value })}
           placeholder={opts.placeholder || ''}
-          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[#0047FF] transition-colors"
-          style={{ border: '1px solid var(--border-2)' }}
+          className="w-full bg-[var(--bg-0)] text-[var(--text-1)] text-sm px-4 py-2.5 outline-none focus:border-[var(--accent)] transition-colors"
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
         />
       )}
     </div>
@@ -49,7 +49,7 @@ function CreateModal({ onClose, onCreate }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center"
       style={{ background: 'rgba(0,0,0,0.75)' }} onClick={onClose}>
       <div className="w-full max-w-lg bg-[var(--bg-1)] p-8 max-h-[90vh] overflow-y-auto"
-        style={{ border: '1px solid var(--border-2)' }}
+        style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}
         onClick={e => e.stopPropagation()}>
         <div className="label-mono mb-2">Workspace / Clients</div>
         <h2 className="font-display text-2xl text-[var(--text-1)] mb-6">Nouveau client</h2>
@@ -67,14 +67,14 @@ function CreateModal({ onClose, onCreate }) {
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               Annuler
             </button>
             <button type="submit" disabled={saving}
               className="flex-1 py-2.5 text-sm text-[var(--text-1)] font-medium transition-colors disabled:opacity-50"
-              style={{ background: '#0047FF' }}
-              onMouseEnter={e => !saving && (e.currentTarget.style.background = '#0036CC')}
-              onMouseLeave={e => !saving && (e.currentTarget.style.background = '#0047FF')}>
+              style={{ background: 'var(--accent)', borderRadius: '8px' }}
+              onMouseEnter={e => !saving && (e.currentTarget.style.background = 'var(--accent-hover)')}
+              onMouseLeave={e => !saving && (e.currentTarget.style.background = 'var(--accent)')}>
               {saving ? 'Création…' : 'Créer le client'}
             </button>
           </div>
@@ -129,9 +129,9 @@ export default function Clients() {
         actions={
           <button onClick={() => setModal(true)}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)]"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => e.currentTarget.style.background = '#0036CC'}
-            onMouseLeave={e => e.currentTarget.style.background = '#0047FF'}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--accent-hover)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'var(--accent)'}>
             <Plus size={14} />
             Nouveau client
           </button>
@@ -139,14 +139,13 @@ export default function Clients() {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-3" style={{ borderBottom: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-3 gap-4 px-10 pt-8">
         {[
           { label: 'Clients total',     value: clients.length },
           { label: 'Budget cumulé',     value: `${(totalBudget / 1000).toFixed(1)}k €` },
           { label: 'Projets associés',  value: clients.reduce((s, c) => s + (c._count?.projects || 0), 0) },
-        ].map((k, i) => (
-          <div key={k.label} className="px-10 py-7"
-            style={{ borderRight: i < 2 ? '1px solid var(--border-1)' : 'none' }}>
+        ].map((k) => (
+          <div key={k.label} className="card px-6 py-5">
             <div className="label-mono mb-2">{k.label}</div>
             <div className="font-display text-3xl text-[var(--text-1)]">{k.value}</div>
           </div>
@@ -159,8 +158,8 @@ export default function Clients() {
           <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-4)]" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Rechercher un client, entreprise…"
-            className="w-full pl-10 pr-4 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none focus:border-[#0047FF] transition-colors"
-            style={{ border: '1px solid var(--border-2)' }} />
+            className="w-full pl-10 pr-4 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none focus:border-[var(--accent)] transition-colors"
+            style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
         </div>
 
         {loading ? (
@@ -170,10 +169,10 @@ export default function Clients() {
             {search ? 'Aucun résultat' : 'Aucun client — créez-en un'}
           </div>
         ) : (
-          <div style={{ border: '1px solid var(--border-1)' }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border-1)', borderRadius: '12px', overflow: 'hidden' }}>
             {/* En-tête tableau */}
             <div className="grid grid-cols-[2fr_2fr_1fr_1fr_1fr_40px] px-5 py-3"
-              style={{ borderBottom: '1px solid var(--border-1)', background: 'var(--bg-1)' }}>
+              style={{ borderBottom: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
               {['Client', 'Contact', 'Secteur', 'Projets', 'Budget', ''].map(h => (
                 <span key={h} className="label-mono">{h}</span>
               ))}
@@ -193,7 +192,7 @@ export default function Clients() {
                   {/* Client */}
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-[var(--text-1)] shrink-0"
-                      style={{ background: '#0047FF22', border: '1px solid #0047FF44', color: '#4d7fff' }}>
+                      style={{ background: 'color-mix(in srgb, var(--accent) 13%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 27%, transparent)', color: '#4d7fff' }}>
                       {c.name[0].toUpperCase()}
                     </div>
                     <div className="min-w-0">

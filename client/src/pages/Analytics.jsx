@@ -27,13 +27,12 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-function KpiCard({ label, value, hint, i, total }) {
+function KpiCard({ label, value, hint, i }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
       transition={{ delay: i * 0.06 }}
-      className="px-10 py-8"
-      style={{ borderRight: i < total - 1 ? '1px solid var(--border-1)' : 'none' }}>
+      className="card px-6 py-5">
       <div className="label-mono mb-3">{label}</div>
       <div className="font-display text-4xl text-[var(--text-1)]">{value}</div>
       <div className="text-xs text-[var(--text-4)] mt-2 font-mono">{hint}</div>
@@ -41,12 +40,12 @@ function KpiCard({ label, value, hint, i, total }) {
   );
 }
 
-function BarRow({ label, count, max, color = '#0047FF', formatValue }) {
+function BarRow({ label, count, max, color = 'var(--accent)', formatValue }) {
   const pct = max > 0 ? Math.max((count / max) * 100, count > 0 ? 4 : 0) : 0;
   return (
     <div className="flex items-center gap-3">
       <div className="label-mono w-32 shrink-0 truncate">{label}</div>
-      <div className="flex-1 h-5 relative" style={{ background: 'var(--bg-1)', border: '1px solid var(--border-1)' }}>
+      <div className="flex-1 h-5 relative overflow-hidden" style={{ background: 'var(--bg-2)', borderRadius: '6px' }}>
         <motion.div
           initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.5 }}
           className="h-full" style={{ background: color }} />
@@ -107,15 +106,16 @@ export default function Analytics() {
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4" style={{ borderBottom: '1px solid var(--border-1)' }}>
-        {kpis.map((k, i) => <KpiCard key={k.label} {...k} i={i} total={kpis.length} />)}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 px-10 pt-8">
+        {kpis.map((k, i) => <KpiCard key={k.label} {...k} i={i} />)}
       </div>
 
       {/* Revenu mensuel */}
-      <section className="p-10" style={{ borderBottom: '1px solid var(--border-1)' }}>
+      <div className="px-10 pt-6">
+      <section className="card p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-display text-xl text-[var(--text-1)] flex items-center gap-2">
-            <TrendingUp size={18} style={{ color: '#0047FF' }} />
+            <TrendingUp size={18} style={{ color: 'var(--accent)' }} />
             Chiffre d'affaires encaissé
           </h2>
           <span className="label-mono">6 derniers mois</span>
@@ -129,31 +129,32 @@ export default function Analytics() {
               axisLine={false} tickLine={false} domain={[0, dataMax => Math.max(dataMax, 100)]}
               tickFormatter={v => v >= 1000 ? `${v / 1000}k` : `${v}`} />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: 'var(--hover-1)' }} />
-            <Bar dataKey="ca" fill="#0047FF" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="ca" fill="var(--accent)" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </section>
+      </div>
 
       {/* Projets par statut / type */}
-      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ borderBottom: '1px solid var(--border-1)' }}>
-        <section className="p-10" style={{ borderRight: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-10 pt-6">
+        <section className="card p-8">
           <h2 className="font-display text-xl text-[var(--text-1)] mb-6">Projets par statut</h2>
           {!data?.projectsByStatus?.length ? (
-            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)' }}>Aucun projet pour l'instant.</div>
+            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>Aucun projet pour l'instant.</div>
           ) : (
             <div className="space-y-3">
               {data.projectsByStatus.map(p => (
                 <BarRow key={p.status} label={PROJECT_STATUS_LABEL[p.status] || p.status}
-                  count={p.count} max={maxProjectStatus} color="#0047FF" />
+                  count={p.count} max={maxProjectStatus} color="var(--accent)" />
               ))}
             </div>
           )}
         </section>
 
-        <section className="p-10">
+        <section className="card p-8">
           <h2 className="font-display text-xl text-[var(--text-1)] mb-6">Projets par type</h2>
           {!data?.projectsByType?.length ? (
-            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)' }}>Aucun projet pour l'instant.</div>
+            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>Aucun projet pour l'instant.</div>
           ) : (
             <div className="space-y-3">
               {data.projectsByType.map(p => (
@@ -166,14 +167,14 @@ export default function Analytics() {
       </div>
 
       {/* Tâches + Factures */}
-      <div className="grid grid-cols-1 lg:grid-cols-2" style={{ borderBottom: '1px solid var(--border-1)' }}>
-        <section className="p-10" style={{ borderRight: '1px solid var(--border-1)' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-10 pt-6">
+        <section className="card p-8">
           <h2 className="font-display text-xl text-[var(--text-1)] mb-6 flex items-center gap-2">
             <ListChecks size={18} style={{ color: '#d97706' }} />
             Tâches par statut
           </h2>
           {!data?.taskStats?.total ? (
-            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)' }}>Aucune tâche pour l'instant.</div>
+            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>Aucune tâche pour l'instant.</div>
           ) : (
             <div className="space-y-3">
               {Object.entries(data.taskStats.byStatus).map(([status, count]) => (
@@ -184,13 +185,13 @@ export default function Analytics() {
           )}
         </section>
 
-        <section className="p-10">
+        <section className="card p-8">
           <h2 className="font-display text-xl text-[var(--text-1)] mb-6 flex items-center gap-2">
             <Receipt size={18} style={{ color: '#ef4444' }} />
             Factures par statut (TTC)
           </h2>
           {!data?.invoiceStatusCounts || Object.values(data.invoiceStatusCounts).every(c => c === 0) ? (
-            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)' }}>Aucune facture pour l'instant.</div>
+            <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>Aucune facture pour l'instant.</div>
           ) : (
             <div className="space-y-3">
               {Object.entries(data.invoiceStatusTotals)
@@ -207,13 +208,14 @@ export default function Analytics() {
       </div>
 
       {/* Top clients */}
-      <section className="p-10">
+      <div className="px-10 py-6">
+      <section className="card p-8">
         <h2 className="font-display text-xl text-[var(--text-1)] mb-6 flex items-center gap-2">
           <Users size={18} style={{ color: '#16a34a' }} />
           Top clients (CA encaissé)
         </h2>
         {!data?.topClients?.length ? (
-          <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)' }}>
+          <div className="text-sm text-[var(--text-3)] p-6" style={{ border: '1px dashed var(--border-2)', borderRadius: '12px' }}>
             Aucune facture encaissée pour l'instant.
           </div>
         ) : (
@@ -225,6 +227,7 @@ export default function Analytics() {
           </div>
         )}
       </section>
+      </div>
     </div>
   );
 }

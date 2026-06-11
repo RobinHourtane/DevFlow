@@ -40,14 +40,14 @@ export default function Sidebar({ onSearchOpen }) {
   }, [user]);
 
   return (
-    <aside className="hidden md:flex w-60 shrink-0 flex-col bg-[var(--bg-0)]"
+    <aside className="hidden md:flex w-60 shrink-0 flex-col bg-[var(--card)]"
       style={{ borderRight: '1px solid var(--border-1)' }}>
 
       {/* Logo */}
       <div className="px-6 py-6" style={{ borderBottom: '1px solid var(--border-1)' }}>
         <div className="label-mono mb-1">DevFlow / AI</div>
         <div className="font-display text-2xl text-[var(--text-1)]">
-          DevFlow<span style={{ color: '#0047FF' }}>.</span>
+          DevFlow<span style={{ color: 'var(--accent)' }}>.</span>
         </div>
       </div>
 
@@ -55,10 +55,10 @@ export default function Sidebar({ onSearchOpen }) {
       <div className="px-3 pt-4 pb-2">
         <button onClick={onSearchOpen}
           className="w-full flex items-center gap-2 px-3 py-2 text-sm text-[var(--text-4)] hover:text-[var(--text-2)] transition-colors"
-          style={{ border: '1px solid var(--bg-2)', background: 'var(--bg-1)' }}>
+          style={{ border: '1px solid var(--border-2)', background: 'var(--bg-0)', borderRadius: '8px' }}>
           <Search size={13} />
           <span className="flex-1 text-left text-xs">Rechercher…</span>
-          <kbd className="label-mono text-[var(--text-5)]" style={{ fontSize: '9px', border: '1px solid var(--border-2)', padding: '1px 4px' }}>⌘K</kbd>
+          <kbd className="label-mono text-[var(--text-5)]" style={{ fontSize: '9px', border: '1px solid var(--border-2)', padding: '1px 4px', borderRadius: '4px' }}>⌘K</kbd>
         </button>
       </div>
 
@@ -67,16 +67,16 @@ export default function Sidebar({ onSearchOpen }) {
         {NAV.map(({ to, icon: Icon, label, badge }) => (
           <NavLink key={to} to={to}
             className={({ isActive }) =>
-              `group flex items-center gap-3 px-3 py-2 text-sm transition-colors duration-150 ${
+              `group flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors duration-150 ${
                 isActive
-                  ? 'bg-[var(--bg-2)] text-[var(--text-1)] border-l-2 border-[#0047FF]'
-                  : 'text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)] border-l-2 border-transparent'
+                  ? 'text-[var(--accent)] font-medium bg-[color-mix(in_srgb,var(--accent)_9%,transparent)]'
+                  : 'text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)]'
               }`
             }>
             {({ isActive }) => (
               <>
                 <Icon size={15} strokeWidth={1.6}
-                  style={{ color: isActive ? '#0047FF' : undefined }} />
+                  style={{ color: isActive ? 'var(--accent)' : undefined }} />
                 <span className="flex-1">{label}</span>
                 {badge && unreadCount > 0 && (
                   <span className="label-mono px-1.5 py-0.5 leading-none text-[10px] font-semibold text-[var(--text-1)]"
@@ -93,13 +93,13 @@ export default function Sidebar({ onSearchOpen }) {
       {/* Bottom */}
       <div style={{ borderTop: '1px solid var(--border-1)' }} className="px-4 py-4 space-y-3">
         <button onClick={toggleTheme}
-          className="w-full flex items-center gap-3 px-3 py-2 text-sm text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)] transition-colors border-l-2 border-transparent">
+          className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)] transition-colors">
           {theme === 'dark' ? <Sun size={15} strokeWidth={1.6} /> : <Moon size={15} strokeWidth={1.6} />}
           {theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
         </button>
 
         <NavLink to="/settings"
-          className="flex items-center gap-3 px-3 py-2 text-sm text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)] transition-colors border-l-2 border-transparent">
+          className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--hover-1)] transition-colors">
           <Settings size={15} strokeWidth={1.6} />
           Paramètres
         </NavLink>
@@ -107,7 +107,7 @@ export default function Sidebar({ onSearchOpen }) {
         {user && (
           <div className="flex items-center gap-3 px-1 py-2">
             <div className="h-8 w-8 flex items-center justify-center text-xs font-semibold text-[var(--text-1)] shrink-0"
-              style={{ background: '#0047FF' }}>
+              style={{ background: 'var(--accent)', borderRadius: '8px' }}>
               {user.name?.[0]?.toUpperCase() || 'U'}
             </div>
             <div className="min-w-0 flex-1">

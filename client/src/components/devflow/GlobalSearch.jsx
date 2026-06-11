@@ -6,7 +6,7 @@ import api from '../../lib/api';
 
 /* ─── Config catégories ─────────────────────────────────────────────────────── */
 const CATEGORIES = [
-  { key: 'projects',  icon: FolderKanban, label: 'Projet',   color: '#0047FF' },
+  { key: 'projects',  icon: FolderKanban, label: 'Projet',   color: 'var(--accent)' },
   { key: 'clients',   icon: Users,        label: 'Client',   color: '#16a34a' },
   { key: 'tasks',     icon: ListChecks,   label: 'Tâche',    color: '#d97706' },
   { key: 'contracts', icon: FileText,     label: 'Contrat',  color: '#7c3aed' },
@@ -156,7 +156,7 @@ export default function GlobalSearch({ open, onClose }) {
                   className="w-full flex items-center gap-3 px-4 py-2.5 transition-colors text-left"
                   style={{ background: active === i ? 'var(--bg-1)' : 'transparent' }}>
                   <div className="p-1.5 shrink-0"
-                    style={{ background: `${cat.color}18`, border: `1px solid ${cat.color}30` }}>
+                    style={{ background: `color-mix(in srgb, ${cat.color} 9%, transparent)`, border: `1px solid color-mix(in srgb, ${cat.color} 19%, transparent)` }}>
                     <Icon size={12} style={{ color: cat.color }} />
                   </div>
                   <div className="min-w-0 flex-1">

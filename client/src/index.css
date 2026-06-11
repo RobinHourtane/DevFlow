@@ -4,43 +4,53 @@
 /* Variante dark basée sur une classe (utilisée par la page Loans) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Bascule de thème en cercle (View Transitions API) — page Loans */
+/* Bascule de thème en cercle (View Transitions API) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
+/* ─── Palette — style "LoanProX" : gris-bleu, cartes, arrondis ────────────── */
+
 :root {
-  --bg-0: #050505;
-  --bg-1: #0a0a0a;
-  --bg-2: #171717;
-  --bg-3: #262626;
-  --border-1: #171717;
-  --border-2: #262626;
-  --border-3: #404040;
-  --text-1: #ffffff;
-  --text-2: #a3a3a3;
-  --text-3: #737373;
-  --text-4: #525252;
-  --text-5: #404040;
+  --bg-0: #111827;   /* fond de page (gray-900) */
+  --bg-1: #1f2937;   /* surfaces / cartes (gray-800) */
+  --bg-2: #2b3648;   /* surélevé (en-têtes de tableaux, actifs) */
+  --bg-3: #374151;
+  --card: #1f2937;
+  --border-1: #283143;
+  --border-2: #374151;
+  --border-3: #4b5563;
+  --text-1: #f9fafb;
+  --text-2: #d1d5db;
+  --text-3: #9ca3af;
+  --text-4: #6b7280;
+  --text-5: #4b5563;
   --hover-1: rgba(255, 255, 255, 0.04);
+  --accent: #0047FF;
+  --accent-hover: #0036CC;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 :root.light {
-  --bg-0: #f3f1ed;
-  --bg-1: #faf9f7;
-  --bg-2: #ece8e1;
-  --bg-3: #ddd7cd;
-  --border-1: #e6e1d9;
-  --border-2: #d6cfc4;
-  --border-3: #bcb4a7;
-  --text-1: #1d1b18;
-  --text-2: #6e6862;
-  --text-3: #948d83;
-  --text-4: #aea89e;
-  --text-5: #c4beb4;
-  --hover-1: rgba(0, 0, 0, 0.035);
+  --bg-0: #f9fafb;   /* fond de page (gray-50) — jamais de blanc pur en fond */
+  --bg-1: #ffffff;   /* cartes blanches sur fond gris (validé sur la page Prêts) */
+  --bg-2: #f3f4f6;
+  --bg-3: #e5e7eb;
+  --card: #ffffff;
+  --border-1: #eef0f3;
+  --border-2: #e5e7eb;
+  --border-3: #d1d5db;
+  --text-1: #111827;
+  --text-2: #4b5563;
+  --text-3: #6b7280;
+  --text-4: #9ca3af;
+  --text-5: #d1d5db;
+  --hover-1: rgba(17, 24, 39, 0.03);
+  --accent: #0047FF;
+  --accent-hover: #0036CC;
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
 }
 
 html, body, #root { height: 100%; }
@@ -53,7 +63,7 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: var(--bg-0);
   color: var(--text-1);
-  transition: background-color 0.15s ease, color 0.15s ease;
+  /* Pas de transition sur le body : elle parasite la révélation en cercle */
 }
 
 .font-display {
@@ -65,20 +75,28 @@ body {
   font-family: "JetBrains Mono", monospace;
 }
 
-/* Label style : UPPERCASE MONO */
+/* Labels : petits, gras, gris — plus de uppercase mono */
 .label-mono {
-  font-family: "JetBrains Mono", monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.68rem;
-  color: var(--text-4);
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+}
+
+/* Carte standard (utilitaire pour les blocs KPI, listes, sections) */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-1);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-2); }
-::-webkit-scrollbar-thumb:hover { background: var(--border-3); }
+::-webkit-scrollbar-thumb { background: var(--border-3); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
 
 /* Animations */
 .stagger-in { animation: slide-up 0.28s ease-out both; }
@@ -89,4 +107,4 @@ body {
 }
 
 /* Accent blue glow */
-.blue-glow { box-shadow: 0 0 24px rgba(0, 71, 255, 0.2); }
+.blue-glow { box-shadow: 0 4px 14px rgba(0, 71, 255, 0.25); }

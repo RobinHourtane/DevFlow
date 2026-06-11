@@ -85,8 +85,8 @@ function CreatePanel({ projects, onCreated, onCancel }) {
     <div className="flex flex-col h-full">
       <div className="px-6 py-4 flex items-center justify-between shrink-0" style={{ borderBottom: '1px solid var(--border-1)' }}>
         <div className="flex items-center gap-3">
-          <div className="p-1.5 bg-[#0047FF]/10 border border-[#0047FF]/20">
-            <Receipt size={14} className="text-[#0047FF]" />
+          <div className="p-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20">
+            <Receipt size={14} className="text-[var(--accent)]" />
           </div>
           <div>
             <p className="text-[var(--text-1)] font-semibold text-sm">Nouvelle facture</p>
@@ -131,12 +131,12 @@ function CreatePanel({ projects, onCreated, onCancel }) {
           <div>
             <div className="flex items-center justify-between mb-3">
               <p className="label-mono text-[var(--text-1)] flex items-center gap-2">
-                <FileText size={12} className="text-[#0047FF]" />
+                <FileText size={12} className="text-[var(--accent)]" />
                 Lignes de prestation
               </p>
               <button type="button" onClick={addItem}
                 className="flex items-center gap-1.5 px-2.5 py-1 text-xs text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-                style={{ border: '1px solid var(--border-2)' }}>
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                 <Plus size={11} /> Ajouter une ligne
               </button>
             </div>
@@ -157,7 +157,7 @@ function CreatePanel({ projects, onCreated, onCancel }) {
                   </div>
                   <button type="button" onClick={() => removeItem(i)} disabled={items.length === 1}
                     className="p-2.5 text-[var(--text-4)] hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    style={{ border: '1px solid var(--border-2)' }}>
+                    style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                     <Trash size={13} />
                   </button>
                 </div>
@@ -199,7 +199,7 @@ function CreatePanel({ projects, onCreated, onCancel }) {
             </div>
             <div className="flex items-center justify-between text-base pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-2)' }}>
               <span className="text-[var(--text-1)] font-semibold">Total TTC</span>
-              <span className="font-mono text-[#0047FF] font-semibold">{fmtEUR(totalTTC)}</span>
+              <span className="font-mono text-[var(--accent)] font-semibold">{fmtEUR(totalTTC)}</span>
             </div>
           </div>
 
@@ -215,14 +215,14 @@ function CreatePanel({ projects, onCreated, onCancel }) {
       <div className="px-6 py-4 flex items-center justify-between shrink-0" style={{ borderTop: '1px solid var(--border-1)' }}>
         <button type="button" onClick={onCancel}
           className="px-4 py-2.5 text-sm text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
-          style={{ border: '1px solid var(--border-2)' }}>
+          style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
           Annuler
         </button>
         <button onClick={handleSubmit} disabled={submitting}
           className="flex items-center gap-2.5 px-6 py-2.5 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-50"
-          style={{ background: '#0047FF' }}
-          onMouseEnter={e => !submitting && (e.currentTarget.style.background = '#0036CC')}
-          onMouseLeave={e => !submitting && (e.currentTarget.style.background = '#0047FF')}>
+          style={{ background: 'var(--accent)', borderRadius: '8px' }}
+          onMouseEnter={e => !submitting && (e.currentTarget.style.background = 'var(--accent-hover)')}
+          onMouseLeave={e => !submitting && (e.currentTarget.style.background = 'var(--accent)')}>
           {submitting
             ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Création…</>
             : <><Receipt size={14} /> Créer la facture</>}
@@ -321,9 +321,9 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
         <div className="flex items-center gap-2 flex-wrap">
           <button onClick={handleDownloadPDF} disabled={downloading}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors disabled:opacity-40"
-            style={{ background: '#0047FF' }}
-            onMouseEnter={e => !downloading && (e.currentTarget.style.background = '#0036CC')}
-            onMouseLeave={e => !downloading && (e.currentTarget.style.background = '#0047FF')}>
+            style={{ background: 'var(--accent)', borderRadius: '8px' }}
+            onMouseEnter={e => !downloading && (e.currentTarget.style.background = 'var(--accent-hover)')}
+            onMouseLeave={e => !downloading && (e.currentTarget.style.background = 'var(--accent)')}>
             {downloading
               ? <><div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" /> Génération…</>
               : <><Download size={13} /> Télécharger PDF</>}
@@ -332,7 +332,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
           {nextCfg && (
             <button onClick={() => handleStatus(nextStatus)} disabled={updating}
               className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors disabled:opacity-50"
-              style={{ border: `1px solid ${nextCfg.color}60`, color: nextCfg.color, background: `${nextCfg.color}10` }}>
+              style={{ border: `1px solid color-mix(in srgb, ${nextCfg.color} 38%, transparent)`, color: nextCfg.color, background: `color-mix(in srgb, ${nextCfg.color} 6%, transparent)` }}>
               <ChevronRight size={12} />
               Marquer « {nextCfg.label} »
             </button>
@@ -340,14 +340,14 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
           {!['CANCELLED'].includes(invoice.status) && invoice.status !== 'DRAFT' && (
             <button onClick={() => handleStatus('DRAFT')} disabled={updating}
               className="px-3 py-2 text-xs text-[var(--text-3)] hover:text-[var(--text-1)] transition-colors disabled:opacity-50"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               Repasser en brouillon
             </button>
           )}
           {invoice.status !== 'CANCELLED' && invoice.status !== 'PAID' && (
             <button onClick={() => handleStatus('CANCELLED')} disabled={updating}
               className="px-3 py-2 text-xs text-[var(--text-3)] hover:text-red-400 transition-colors disabled:opacity-50"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               Annuler
             </button>
           )}
@@ -355,7 +355,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
           <div className="ml-auto">
             <button onClick={() => onDelete(invoice.id)}
               className="p-2 text-[var(--text-4)] hover:text-red-400 transition-colors"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               <Trash2 size={14} />
             </button>
           </div>
@@ -366,7 +366,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
       <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
         <div>
           <p className="label-mono text-[var(--text-1)] mb-3">Lignes de prestation</p>
-          <div style={{ border: '1px solid var(--border-1)' }}>
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border-1)', borderRadius: '12px', overflow: 'hidden' }}>
             <div className="grid grid-cols-12 px-4 py-2.5" style={{ background: 'var(--bg-1)', borderBottom: '1px solid var(--border-1)' }}>
               <div className="col-span-6 label-mono">Description</div>
               <div className="col-span-2 label-mono text-right">Qté</div>
@@ -398,7 +398,7 @@ function InvoiceDetail({ invoice, onStatusChange, onDelete }) {
             </div>
             <div className="flex items-center justify-between text-base pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-2)' }}>
               <span className="text-[var(--text-1)] font-semibold">Total TTC</span>
-              <span className="font-mono text-[#0047FF] font-semibold">{fmtEUR(totalTTC)}</span>
+              <span className="font-mono text-[var(--accent)] font-semibold">{fmtEUR(totalTTC)}</span>
             </div>
             {invoice.paidAt && (
               <div className="flex items-center gap-1.5 justify-end pt-2 text-xs" style={{ color: '#16a34a' }}>
@@ -492,7 +492,7 @@ export default function Invoices() {
       { label: 'Encaissé',    value: fmtEUR(paid.reduce((s, i) => s + totalTTC(i), 0)),    accent: '#16a34a' },
       { label: 'En attente',  value: fmtEUR(pending.reduce((s, i) => s + totalTTC(i), 0)), accent: '#d97706' },
       { label: 'En retard',   value: fmtEUR(overdue.reduce((s, i) => s + totalTTC(i), 0)), accent: '#ef4444' },
-      { label: 'Total émis',  value: fmtEUR(invoices.reduce((s, i) => s + totalTTC(i), 0)), accent: '#0047FF' },
+      { label: 'Total émis',  value: fmtEUR(invoices.reduce((s, i) => s + totalTTC(i), 0)), accent: 'var(--accent)' },
     ];
   }, [invoices]);
 
@@ -506,17 +506,16 @@ export default function Invoices() {
           <button
             onClick={() => setMode(mode === 'create' ? 'list' : 'create')}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] transition-colors"
-            style={{ background: mode === 'create' ? 'var(--border-2)' : '#0047FF' }}>
+            style={{ background: mode === 'create' ? 'var(--border-2)' : 'var(--accent)' }}>
             {mode === 'create' ? <><X size={14} /> Annuler</> : <><Plus size={14} /> Nouvelle facture</>}
           </button>
         }
       />
 
       {/* KPIs */}
-      <div className="grid grid-cols-4 shrink-0" style={{ borderBottom: '1px solid var(--border-1)' }}>
-        {kpis.map((k, i) => (
-          <div key={k.label} className="px-8 py-6"
-            style={{ borderRight: i < 3 ? '1px solid var(--border-1)' : 'none' }}>
+      <div className="grid grid-cols-4 gap-4 shrink-0 px-8 py-5">
+        {kpis.map((k) => (
+          <div key={k.label} className="card px-6 py-4">
             <div className="label-mono mb-2">{k.label}</div>
             <div className="font-display text-2xl" style={{ color: k.accent }}>{k.value}</div>
           </div>
@@ -534,13 +533,13 @@ export default function Invoices() {
               <input value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="Rechercher…"
                 className="w-full pl-9 pr-3 py-2 bg-[var(--bg-0)] text-[var(--text-1)] text-sm outline-none"
-                style={{ border: '1px solid var(--border-2)' }} />
+                style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }} />
             </div>
             <div className="flex gap-1 flex-wrap">
               {[['ALL', 'Toutes'], ...Object.entries(STATUS_CFG).map(([k, v]) => [k, v.label])].map(([k, label]) => (
                 <button key={k} onClick={() => setFilter(k)}
                   className={`px-2.5 py-1 text-xs transition-colors ${filter === k ? 'text-[var(--text-1)] bg-[var(--bg-3)]' : 'text-[var(--text-3)] hover:text-[var(--text-1)]'}`}
-                  style={{ border: '1px solid var(--border-2)' }}>
+                  style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
                   {label}
                 </button>
               ))}
@@ -568,7 +567,7 @@ export default function Invoices() {
                     style={{
                       borderBottom: '1px solid var(--bg-2)',
                       background: isActive ? 'var(--bg-1)' : undefined,
-                      borderLeft: isActive ? '2px solid #0047FF' : '2px solid transparent',
+                      borderLeft: isActive ? '2px solid var(--accent)' : '2px solid transparent',
                     }}>
                     <div className="flex items-start justify-between gap-2 mb-1.5">
                       <p className="text-sm text-[var(--text-1)] font-medium truncate leading-snug">{inv.number}</p>
@@ -619,7 +618,7 @@ export default function Invoices() {
                 {invoices.length === 0 && (
                   <button onClick={() => setMode('create')}
                     className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[var(--text-1)] mt-1"
-                    style={{ background: '#0047FF' }}>
+                    style={{ background: 'var(--accent)', borderRadius: '8px' }}>
                     <Plus size={13} />
                     Nouvelle facture
                   </button>

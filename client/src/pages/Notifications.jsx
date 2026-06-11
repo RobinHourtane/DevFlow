@@ -14,7 +14,7 @@ import api from '../lib/api';
 const CATEGORY_CFG = {
   task_overdue:     { icon: ListChecks, label: 'Tâche',    color: '#d97706' },
   invoice_overdue:  { icon: Receipt,    label: 'Facture',  color: '#ef4444' },
-  contract_stale:   { icon: FileText,   label: 'Contrat',  color: '#0047FF' },
+  contract_stale:   { icon: FileText,   label: 'Contrat',  color: 'var(--accent)' },
 };
 const DEFAULT_CFG = { icon: Info, label: 'Info', color: 'var(--text-3)' };
 
@@ -67,7 +67,7 @@ export default function Notifications() {
           unreadCount > 0 && (
             <button onClick={handleMarkAllRead}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[var(--text-1)] hover:text-[var(--text-1)] transition-colors"
-              style={{ border: '1px solid var(--border-2)' }}>
+              style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
               <CheckCheck size={14} />
               Tout marquer comme lu
             </button>
@@ -80,7 +80,7 @@ export default function Notifications() {
         {[['ALL', 'Toutes'], ['UNREAD', `Non lues${unreadCount > 0 ? ` (${unreadCount})` : ''}`]].map(([k, label]) => (
           <button key={k} onClick={() => setFilter(k)}
             className={`px-3 py-1.5 text-xs transition-colors ${filter === k ? 'text-[var(--text-1)] bg-[var(--bg-3)]' : 'text-[var(--text-3)] hover:text-[var(--text-1)]'}`}
-            style={{ border: '1px solid var(--border-2)' }}>
+            style={{ border: '1px solid var(--border-2)', borderRadius: '8px' }}>
             {label}
           </button>
         ))}
@@ -120,7 +120,7 @@ export default function Notifications() {
                     }}
                     onClick={() => handleClick(n)}>
 
-                    <div className="p-2 shrink-0" style={{ background: `${cfg.color}15`, border: `1px solid ${cfg.color}30` }}>
+                    <div className="p-2 shrink-0" style={{ background: `color-mix(in srgb, ${cfg.color} 8%, transparent)`, border: `1px solid color-mix(in srgb, ${cfg.color} 19%, transparent)` }}>
                       <Icon size={14} style={{ color: cfg.color }} />
                     </div>
 
